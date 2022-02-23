@@ -1,3 +1,4 @@
+import React from "react";
 import {
   LeftContent,
   Line,
@@ -9,12 +10,12 @@ import {
   Wrapper,
 } from "./styles";
 
-function Header() {
+const Header: React.FC<{ isHome: boolean | undefined }> = (props) => {
   return (
     <Wrapper>
       <LeftContent>
         <Logo>TGL</Logo>
-        <Navigate>Home</Navigate>
+        {props.isHome ? <></> : <Navigate>Home</Navigate>}
       </LeftContent>
       <Line />
       <RightContent>
@@ -26,6 +27,6 @@ function Header() {
       </RightContent>
     </Wrapper>
   );
-}
+};
 
 export default Header;
