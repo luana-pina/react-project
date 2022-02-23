@@ -4,3 +4,8 @@ body {
   font-family: "Helvetica Neue", Helvetica;
   width: 100vw;
 }
+
+span {
+  font-weight: bold;
+  margin-right: 5px;
+}

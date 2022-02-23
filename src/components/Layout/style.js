@@ -2,13 +2,11 @@ import styled from "styled-components/macro";
 
 export const PageContent = styled.div`
   display: flex;
-  justify-content: center;
   width: 80%;
-  padding: 4% 1% 0 1%;
-  align-items: center;
+  padding-top: 4%;
 `;
 export const Wrapper = styled.div`
-  min-height: 100vw;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
