@@ -6,6 +6,7 @@ import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
 import "./App.css";
+import NotFound from "./pages/NotFound/NotFound";
 
 function App() {
   return (
@@ -14,8 +15,9 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/games" element={<Games />} />
+        <Route path="/games/:gameId" element={<Games />} />
         <Route path="/forgot" element={<ResetPassword />} />
+        <Route path="/*" element={<NotFound />} />
       </Routes>
     </div>
   );
