@@ -7,26 +7,21 @@ export const Content = styled.div`
   padding: 0;
 `;
 
-export const GameButton = styled(NavLink)`
+export const GameButton = styled.button`
   font-size: 14px;
   font-style: italic;
   text-align: center;
-  line-height: ${(props) => (props.height ? props.height : "2.5vw")};
   text-decoration: none;
   font-weight: 600;
   width: ${(props) => (props.width ? props.width : "8vw")};
   height: ${(props) => (props.height ? props.height : "2.5vw")};
   border-radius: 80px;
-  background-color: #ffffff;
+  background-color: ${(props) => (props.active ? props.color : "#ffffff")};
   border: 2px solid ${(props) => props.color};
-  color: ${(props) => props.color};
+  color: ${(props) => (props.active ? "#ffffff" : props.color)};
   margin-right: 20px;
   cursor: pointer;
   :hover {
-    color: #ffffff;
-    background-color: ${(props) => props.color};
-  }
-  &.active {
     color: #ffffff;
     background-color: ${(props) => props.color};
   }

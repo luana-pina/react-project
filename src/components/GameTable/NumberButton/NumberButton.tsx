@@ -1,8 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { ButtonTable } from "./style";
 
 const NumberButton: React.FC<{ value: number; color: string }> = (props) => {
   const [isSelected, setIsSelected] = useState(false);
+  const params = useParams();
+  useEffect(() => {
+    setIsSelected(false);
+  }, [params]);
+
   return (
     <td>
       <ButtonTable

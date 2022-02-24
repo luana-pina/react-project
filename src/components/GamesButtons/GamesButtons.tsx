@@ -1,4 +1,5 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 import { Content } from "../../pages/Games/styles";
 import { GameButton } from "./styles";
 
@@ -16,16 +17,19 @@ const GamesButtons: React.FC<{
   gamesList: Game[];
   width?: string | undefined;
   height?: string | undefined;
-  to: string;
+  to: Function;
 }> = (props) => {
+  const params = useParams();
+
   const buttonsList = props.gamesList.map((item) => {
     return (
       <GameButton
-        to={props.to + `/${item.id}`}
         width={props.width}
         height={props.height}
         color={item.color}
+        active={params.gameId === item.id || params["*"] === item.id}
         key={item.id}
+        onClick={() => props.to(item.id)}
       >
         {item.type}
       </GameButton>

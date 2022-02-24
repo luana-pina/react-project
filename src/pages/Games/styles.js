@@ -9,13 +9,13 @@ export const Content = styled.div`
 export const LeftContent = styled.div`
   display: flex;
   flex-direction: column;
-  width: 65%;
+  width: 64%;
 `;
 export const RightContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  width: 35%;
+  width: 36%;
 `;
 export const PageTitle = styled.h3`
   font-size: 23px;
