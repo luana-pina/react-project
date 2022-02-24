@@ -1,4 +1,3 @@
-import { HiOutlineArrowRight } from "react-icons/hi";
 import styled from "styled-components/macro";
 
 export const Wrapper = styled.header`
@@ -56,16 +55,11 @@ export const Logo = styled.h1`
   margin: 0px 0px 0px 0px;
 `;
 
-export const Navigate = styled.h4`
+export const NavIcon = styled.h4`
   font-weight: 700;
   font-style: oblique;
   color: #707070;
   font-size: 20px;
   cursor: pointer;
-`;
-
-export const LogoutArrow = styled(HiOutlineArrowRight)`
-  margin-left: 0.6vw;
-  color: #707070;
-  cursor: pointer;
+  text-decoration: none;
 `;

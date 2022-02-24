@@ -1,9 +1,30 @@
 import React, { useEffect, useState } from "react";
-import { Content, LeftContent, PageTitle } from "./styles";
+import {
+  Content,
+  Description,
+  DescriptionTitle,
+  LeftContent,
+  PageTitle,
+  RightContent,
+  Subtitle,
+} from "./styles";
 import Layout from "../../components/Layout/Layout";
 import { useNavigate, useParams } from "react-router-dom";
+import GameTable from "../../components/GameTable/GameTable";
+import GamesButtons from "../../components/GamesButtons/GamesButtons";
+import ActionButtons from "../../components/ActionsButtons/ActionButtons";
+import Cart from "../../components/Cart/Cart";
 
-const DUMMY_GAMES = [
+type Game = {
+  id: string;
+  type: string;
+  description: string;
+  range: number;
+  price: number;
+  "max-number": number;
+  color: string;
+};
+const DUMMY_GAMES: Game[] = [
   {
     id: "1",
     type: "Timemania",
@@ -47,6 +68,15 @@ const DUMMY_GAMES = [
 ];
 
 const Games: React.FC = () => {
+  const listItems = [
+    {
+      id: "g1",
+      game: "Lotofácil",
+      color: "#7F3992",
+      price: 2.5,
+      selectedNumbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+    },
+  ];
   const params = useParams();
   const { gameId } = params;
   const history = useNavigate();
@@ -82,7 +112,18 @@ const Games: React.FC = () => {
           <PageTitle>
             <span>New bet</span> for {game.type}
           </PageTitle>
+          <Subtitle>Choose a game</Subtitle>
+          <GamesButtons gamesList={DUMMY_GAMES} />
+          <div>
+            <DescriptionTitle>Fill your bet</DescriptionTitle>
+            <Description>{game.description}</Description>
+          </div>
+          <GameTable range={game.range} color={game.color} />
+          <ActionButtons />
         </LeftContent>
+        <RightContent>
+          <Cart listItems={listItems} totalCart={2.5} />
+        </RightContent>
       </Content>
     </Layout>
   );
