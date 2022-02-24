@@ -26,7 +26,7 @@ type Game = {
 };
 const DUMMY_GAMES: Game[] = [
   {
-    id: "1",
+    id: "timemania",
     type: "Timemania",
     description:
       "Escolha 10 números para apostar na Timemania. Você ganha acertando 7, 6, 5, 4 ou 3 números. São muitas chances de ganhar, e agora você joga de onde estiver!",
@@ -36,7 +36,7 @@ const DUMMY_GAMES: Game[] = [
     color: "#56464a",
   },
   {
-    id: "2",
+    id: "lotofacil",
     type: "Lotofácil",
     description:
       "Escolha 15 números para apostar na lotofácil. Você ganha acertando 11, 12, 13, 14 ou 15 números. São muitas chances de ganhar, e agora você joga de onde estiver!",
@@ -46,7 +46,7 @@ const DUMMY_GAMES: Game[] = [
     color: "#7F3992",
   },
   {
-    id: "3",
+    id: "megasena",
     type: "Mega-Sena",
     description:
       "Escolha 6 números dos 60 disponíveis na mega-sena. Ganhe com 6, 5 ou 4 acertos. São realizados dois sorteios semanais para você apostar e torcer para ficar milionário.",
@@ -56,7 +56,7 @@ const DUMMY_GAMES: Game[] = [
     color: "#01AC66",
   },
   {
-    id: "4",
+    id: "quina",
     type: "Quina",
     description:
       "Escolha 5 números dos 80 disponíveis na quina. 5, 4, 3 ou 2 acertos. São seis sorteios semanais e seis chances de ganhar.",
@@ -113,7 +113,7 @@ const Games: React.FC = () => {
             <span>New bet</span> for {game.type}
           </PageTitle>
           <Subtitle>Choose a game</Subtitle>
-          <GamesButtons gamesList={DUMMY_GAMES} />
+          <GamesButtons gamesList={DUMMY_GAMES} to={`/games`} />
           <div>
             <DescriptionTitle>Fill your bet</DescriptionTitle>
             <Description>{game.description}</Description>

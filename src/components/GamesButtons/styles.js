@@ -11,11 +11,11 @@ export const GameButton = styled(NavLink)`
   font-size: 14px;
   font-style: italic;
   text-align: center;
-  line-height: 2.5vw;
+  line-height: ${(props) => (props.height ? props.height : "2.5vw")};
   text-decoration: none;
   font-weight: 600;
-  width: 8vw;
-  height: 2.5vw;
+  width: ${(props) => (props.width ? props.width : "8vw")};
+  height: ${(props) => (props.height ? props.height : "2.5vw")};
   border-radius: 80px;
   background-color: #ffffff;
   border: 2px solid ${(props) => props.color};

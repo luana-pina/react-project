@@ -12,10 +12,21 @@ type Game = {
   color: string;
 };
 
-const GamesButtons: React.FC<{ gamesList: Game[] }> = (props) => {
+const GamesButtons: React.FC<{
+  gamesList: Game[];
+  width?: string | undefined;
+  height?: string | undefined;
+  to: string;
+}> = (props) => {
   const buttonsList = props.gamesList.map((item) => {
     return (
-      <GameButton to={`/games/${item.id}`} color={item.color} key={item.id}>
+      <GameButton
+        to={props.to + `/${item.id}`}
+        width={props.width}
+        height={props.height}
+        color={item.color}
+        key={item.id}
+      >
         {item.type}
       </GameButton>
     );
