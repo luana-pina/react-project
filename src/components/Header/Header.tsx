@@ -20,7 +20,7 @@ const Header: React.FC<{ isHome: boolean | undefined }> = (props) => {
         {props.isHome ? (
           <></>
         ) : (
-          <NavIcon onClick={() => navigate("/")}>Home</NavIcon>
+          <NavIcon onClick={() => navigate("/home")}>Home</NavIcon>
         )}
       </LeftContent>
       <Line />

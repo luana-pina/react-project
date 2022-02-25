@@ -27,22 +27,30 @@ type GamesArray = Array<{
 function Home() {
   const [filtered, setFiltered] = useState<GamesArray | undefined>();
   const params = useParams();
-  const gameId = params["*"];
+  const gameId: string | undefined = params["*"];
   const navigate = useNavigate();
 
   useEffect(() => {
     function gamesFilter(gamesList: GamesArray) {
-      const filter = gamesList.filter((item) => item.gameId === gameId);
+      console.log();
+      const filter = gamesList.filter((item) => gameId?.match(item.gameId));
+      filter.sort((a, b) => {
+        if (a.gameName > b.gameName) return 1;
+        if (a.gameName < b.gameName) return -1;
+        return 0;
+      });
       setFiltered(filter);
     }
     gamesFilter(listItems);
   }, [gameId]);
 
   function changeSelect(buttonId: string) {
-    if (params["*"] === buttonId) {
-      navigate("/home");
+    if (gameId?.match(buttonId)) {
+      let newParams = gameId.replace(`+${buttonId}`, "");
+      navigate(`/home/${newParams}`);
     } else {
-      navigate(`/home/${buttonId}`);
+      let newParams = gameId?.concat(`+${buttonId}`);
+      navigate(`/home/${newParams}`);
     }
   }
 
@@ -71,16 +79,8 @@ function Home() {
           element={
             <RecentGames>
               {filtered ? (
-                filtered.map((item) => {
-                  return (
-                    <GameCard
-                      key={item.id}
-                      color={item.color}
-                      price={item.price}
-                      game={item.gameName}
-                      selectedNumbers={item.selectedNumbers}
-                    />
-                  );
+                filtered.sort().map((item) => {
+                  return <GameCard key={item.id} item={item} />;
                 })
               ) : (
                 <p>Not found games!</p>
@@ -93,15 +93,7 @@ function Home() {
           element={
             <RecentGames>
               {listItems.map((item) => {
-                return (
-                  <GameCard
-                    key={item.id}
-                    color={item.color}
-                    price={item.price}
-                    game={item.gameName}
-                    selectedNumbers={item.selectedNumbers}
-                  />
-                );
+                return <GameCard key={item.id} item={item} />;
               })}
             </RecentGames>
           }
