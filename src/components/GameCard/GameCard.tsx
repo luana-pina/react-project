@@ -1,5 +1,4 @@
 import React from "react";
-import Card from "../UI/Card/Card";
 import {
   CardContent,
   CardWrapper,
@@ -15,11 +14,12 @@ const GameCard: React.FC<{
   color: string;
   price: number;
   selectedNumbers: number[];
+  canDelete?: boolean;
 }> = (props) => {
   const { selectedNumbers, color, game, price } = props;
   return (
     <CardWrapper>
-      <DeleteIcon size={20} />
+      {props.canDelete && <DeleteIcon size={25} />}
       <CardContent color={color}>
         <SelectedNumbers>{selectedNumbers.join(", ")}</SelectedNumbers>
         <InfoCard>

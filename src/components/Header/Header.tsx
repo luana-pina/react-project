@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { LeftArrow } from "../UI/LeftArrow/LeftArrow";
+import { RightArrow } from "../UI/Arrows/Arrows";
 import {
   LeftContent,
   Line,
@@ -28,7 +28,7 @@ const Header: React.FC<{ isHome: boolean | undefined }> = (props) => {
         <NavIcon>Account</NavIcon>
         <Logout onClick={() => navigate("/login")}>
           <NavIcon>Log out</NavIcon>
-          <LeftArrow size={23} />
+          <RightArrow size={23} />
         </Logout>
       </RightContent>
     </Wrapper>

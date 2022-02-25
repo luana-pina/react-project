@@ -3,7 +3,7 @@ import { Route, Routes, useNavigate, useParams } from "react-router-dom";
 import GameCard from "../../components/GameCard/GameCard";
 import GamesButtons from "../../components/GamesButtons/GamesButtons";
 import Layout from "../../components/Layout/Layout";
-import { LeftArrow } from "../../components/UI/LeftArrow/LeftArrow";
+import { RightArrow } from "../../components/UI/Arrows/Arrows";
 import { DUMMY_GAMES, listItems } from "../data";
 import {
   Filters,
@@ -62,7 +62,7 @@ function Home() {
           </Filters>
         </LeftContent>
         <NewBet to={`/games/${DUMMY_GAMES[0].id}`}>
-          New Bet <LeftArrow color="#B5C401" />
+          New Bet <RightArrow color="#B5C401" />
         </NewBet>
       </TopContent>
       <Routes>

@@ -1,10 +1,11 @@
 import React from "react";
 import Header from "../Header/Header";
-import { PageContent, Wrapper } from "./style";
+import { Wrapper } from "../UI/Wrapper/Wrapper";
+import { PageContent } from "./style";
 
 const Layout: React.FC<{ isHome?: boolean | undefined }> = (props) => {
   return (
-    <Wrapper>
+    <Wrapper direction="column">
       <Header isHome={props.isHome} />
       <PageContent>{props.children}</PageContent>
     </Wrapper>

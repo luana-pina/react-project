@@ -10,15 +10,15 @@ export const Content = styled.div`
   padding: 0.5rem;
   box-shadow: 0px 3px 25px #00000014;
   border-top-left-radius: ${(props) =>
-    props.borderTopLeftRadius ? props.style.borderBottomLeftRadius : "10px"};
+    props.borderTopLeftRadius ? props.style.borderBottomLeftRadius : "15px"};
   border-top-right-radius: ${(props) =>
-    props.borderTopRightRadius ? props.style.borderTopLeftRadius : "10px"};
+    props.borderTopRightRadius ? props.style.borderTopLeftRadius : "15px"};
   border-bottom-left-radius: ${(props) =>
     props.borderBottomLeftRadius
       ? props.style.borderBottomRightRadius
-      : "10px"};
+      : "15px"};
   border-bottom-right-radius: ${(props) =>
-    props.borderBottomRightRadius ? props.style.borderTopRightRadius : "10px"};
+    props.borderBottomRightRadius ? props.style.borderTopRightRadius : "15px"};
   background-color: ${(props) =>
     props.style.color ? props.style.color : "#ffffff"};
   border: 1px solid #e2e2e2;

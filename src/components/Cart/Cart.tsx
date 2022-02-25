@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import GameCard from "../GameCard/GameCard";
 import Card from "../UI/Card/Card";
-import { LeftArrow } from "../UI/LeftArrow/LeftArrow";
+import { RightArrow } from "../UI/Arrows/Arrows";
 import { CartItems, CartTitle, CartTotal, TextButton } from "./styles";
 
 type cartItem = Array<{
@@ -46,6 +46,7 @@ const Cart: React.FC<{ listItems: cartItem }> = (props) => {
                 price={item.price}
                 game={item.gameName}
                 selectedNumbers={item.selectedNumbers}
+                canDelete={true}
               />
             );
           })}
@@ -66,7 +67,7 @@ const Cart: React.FC<{ listItems: cartItem }> = (props) => {
         }}
       >
         <TextButton onClick={() => navigate("/")}>
-          Save <LeftArrow color="#27C383" size={35} />
+          Save <RightArrow color="#27C383" size={35} />
         </TextButton>
       </Card>
     </>
