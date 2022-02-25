@@ -1,9 +1,13 @@
 import React from "react";
 import { Input, Label } from "./style";
 
-const Form: React.FC<{ label: string }> = (props) => {
+const Form: React.FC<{
+  label: string;
+  input: { type: string; id: string };
+  onChange: Function;
+}> = (props) => {
   return (
-    <form
+    <div
       style={{
         display: "flex",
         flexDirection: "row",
@@ -13,9 +17,13 @@ const Form: React.FC<{ label: string }> = (props) => {
         alignItems: "center",
       }}
     >
-      <Label>{props.label}</Label>
-      <Input></Input>
-    </form>
+      <Label htmlFor={props.input.id}>{props.label}</Label>
+      <Input
+        type={props.input.type}
+        id={props.input.id}
+        onChange={props.onChange}
+      />
+    </div>
   );
 };
 export default Form;

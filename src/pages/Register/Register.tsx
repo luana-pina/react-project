@@ -1,12 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Base from "../../components/Base/Base";
 import Card from "../../components/UI/Card/Card";
 import Form from "../../components/UI/Form/Form";
 
 function Register() {
+  const [inputValues, setInputValues] = useState({});
+  const navigate = useNavigate();
+
+  function handleSubmit(e: React.FormEvent) {
+    console.log(inputValues);
+    navigate("/login");
+  }
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setInputValues({ ...inputValues, [e.target.id]: e.target.value });
+  }
+
   return (
     <Base
-      submit={{ text: "Register", path: "/login" }}
+      submit={{ text: "Register", onSubmit: handleSubmit }}
       pageTitle="Registration"
       back={true}
     >
@@ -18,7 +30,11 @@ function Register() {
           alignItems: "center",
         }}
       >
-        <Form label="Name" />
+        <Form
+          input={{ type: "text", id: "nameInput" }}
+          label="Name"
+          onChange={handleChange}
+        />
       </Card>
       <Card
         style={{
@@ -30,7 +46,11 @@ function Register() {
           alignItems: "center",
         }}
       >
-        <Form label="Email" />
+        <Form
+          input={{ type: "text", id: "emailInput" }}
+          label="Email"
+          onChange={handleChange}
+        />
       </Card>
       <Card
         style={{
@@ -42,7 +62,11 @@ function Register() {
           alignItems: "center",
         }}
       >
-        <Form label="Password" />
+        <Form
+          input={{ type: "password", id: "passwordInput" }}
+          label="Password"
+          onChange={handleChange}
+        />
       </Card>
     </Base>
   );

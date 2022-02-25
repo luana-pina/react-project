@@ -68,10 +68,12 @@ export const Forget = styled(Link)`
   color: #c1c1c1;
   text-decoration: none;
 `;
-export const SubmitButton = styled(Link)`
+export const SubmitButton = styled.button`
   display: flex;
   align-items: center;
   text-decoration: none;
+  border: none;
+  background-color: transparent;
   color: #b5c401;
   font-size: 30px;
   font-weight: bold;

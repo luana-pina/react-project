@@ -17,7 +17,7 @@ import {
 
 const Base: React.FC<{
   pageTitle: string;
-  submit: { text: string; path: string };
+  submit: { text: string; onSubmit: Function };
   forget?: boolean;
   back?: boolean;
 }> = (props) => {
@@ -42,7 +42,7 @@ const Base: React.FC<{
           }}
         >
           {props.forget && <Forget to="/forgot">I forget my password</Forget>}
-          <SubmitButton to={props.submit.path}>
+          <SubmitButton type="submit" onClick={props.submit.onSubmit}>
             {props.submit.text}
             <RightArrow color="#b5c401" size={32} />
           </SubmitButton>
