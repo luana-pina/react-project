@@ -17,14 +17,25 @@ type cartItem = Array<{
 const Cart: React.FC<{ listItems: cartItem }> = (props) => {
   const navigate = useNavigate();
   const [totalCart, setTotalCart] = useState<number>();
+  const [listItems, setListItems] = useState<cartItem>(props.listItems);
+
+  function deleteGameCard(cardId: string): void {
+    let newListItems = [...listItems];
+    newListItems.forEach((item, index) => {
+      if (item.id === cardId) {
+        newListItems.splice(index, 1);
+      }
+    });
+    setListItems(newListItems);
+  }
 
   useEffect(() => {
     let totalAmount: number = 0;
-    props.listItems.forEach((item) => {
+    listItems.forEach((item) => {
       totalAmount += item.price;
     });
     setTotalCart(totalAmount);
-  }, [props.listItems, setTotalCart]);
+  }, [listItems, setTotalCart]);
 
   return (
     <>
@@ -38,16 +49,9 @@ const Cart: React.FC<{ listItems: cartItem }> = (props) => {
       >
         <CartTitle>Cart</CartTitle>
         <CartItems>
-          {props.listItems.map((item) => {
+          {listItems.map((item) => {
             return (
-              <GameCard
-                key={item.id}
-                color={item.color}
-                price={item.price}
-                game={item.gameName}
-                selectedNumbers={item.selectedNumbers}
-                canDelete={true}
-              />
+              <GameCard key={item.id} item={item} delete={deleteGameCard} />
             );
           })}
         </CartItems>

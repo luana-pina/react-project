@@ -10,21 +10,32 @@ import {
 } from "./styles";
 
 const GameCard: React.FC<{
-  game: string;
-  color: string;
-  price: number;
-  selectedNumbers: number[];
-  canDelete?: boolean;
+  item: {
+    id: string;
+    gameId: string;
+    gameName: string;
+    color: string;
+    price: number;
+    selectedNumbers: number[];
+  };
+  delete?: Function | undefined;
 }> = (props) => {
-  const { selectedNumbers, color, game, price } = props;
+  const { item } = props;
+
+  const onDelete = () => {
+    if (props.delete) {
+      props.delete(item.id);
+    }
+  };
+
   return (
     <CardWrapper>
-      {props.canDelete && <DeleteIcon size={25} />}
-      <CardContent color={color}>
-        <SelectedNumbers>{selectedNumbers.join(", ")}</SelectedNumbers>
+      {props.delete && <DeleteIcon size={25} onClick={onDelete} />}
+      <CardContent color={item.color}>
+        <SelectedNumbers>{item.selectedNumbers.join(", ")}</SelectedNumbers>
         <InfoCard>
-          <GameName color={color}>{game}</GameName>
-          <Price>{price}</Price>
+          <GameName color={item.color}>{item.gameName}</GameName>
+          <Price>{item.price}</Price>
         </InfoCard>
       </CardContent>
     </CardWrapper>
