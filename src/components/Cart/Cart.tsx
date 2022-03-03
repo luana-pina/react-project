@@ -4,22 +4,14 @@ import GameCard from "../GameCard/GameCard";
 import Card from "../UI/Card/Card";
 import { RightArrow } from "../UI/Arrows/Arrows";
 import { CartItems, CartTitle, CartTotal, TextButton } from "./styles";
+import { ICardGame } from "../../shared/interfaces";
 
-type cartItem = Array<{
-  id: string;
-  gameName: string;
-  gameId: string;
-  color: string;
-  price: number;
-  selectedNumbers: Array<number>;
-}>;
-
-const Cart: React.FC<{ listItems: cartItem }> = (props) => {
+const Cart: React.FC<{ listItems: ICardGame[] }> = (props) => {
   const navigate = useNavigate();
   const [totalCart, setTotalCart] = useState<number>();
-  const [listItems, setListItems] = useState<cartItem>(props.listItems);
+  const [listItems, setListItems] = useState<ICardGame[]>(props.listItems);
 
-  function deleteGameCard(cardId: string): void {
+  function deleteGameCard(cardId: number): void {
     let newListItems = [...listItems];
     newListItems.forEach((item, index) => {
       if (item.id === cardId) {

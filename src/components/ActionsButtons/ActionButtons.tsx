@@ -1,7 +1,7 @@
 import React from "react";
 import { ActionsGame, AddCart, CartIcon, Content } from "./styles";
 
-const ActionButtons: React.FC = () => {
+const ActionButtons: React.FC<{ range: number }> = () => {
   return (
     <Content>
       <div>

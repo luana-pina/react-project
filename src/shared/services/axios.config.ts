@@ -10,7 +10,7 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
   async (config) => {
-    const isToken = false;
+    const isToken = localStorage.getItem("bearer");
 
     if (isToken) {
       config.headers!.Authorization = "Bearer " + isToken;
@@ -24,7 +24,6 @@ instance.interceptors.request.use(
 );
 instance.interceptors.request.use(
   async (response) => {
-    console.log("response no interceptors", response);
     return response;
   },
   function (error) {

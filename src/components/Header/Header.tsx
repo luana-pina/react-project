@@ -13,6 +13,12 @@ import {
 
 const Header: React.FC<{ isHome: boolean | undefined }> = (props) => {
   const navigate = useNavigate();
+
+  function logoutHandler() {
+    localStorage.removeItem("bearer");
+    navigate("/login");
+  }
+
   return (
     <Wrapper>
       <LeftContent>
@@ -26,7 +32,7 @@ const Header: React.FC<{ isHome: boolean | undefined }> = (props) => {
       <Line />
       <RightContent>
         <NavIcon>Account</NavIcon>
-        <Logout onClick={() => navigate("/login")}>
+        <Logout onClick={logoutHandler}>
           <NavIcon>Log out</NavIcon>
           <RightArrow size={23} />
         </Logout>

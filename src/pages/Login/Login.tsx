@@ -15,11 +15,10 @@ function Login() {
   const { login } = auth();
 
   async function handleSubmit(e: React.FormEvent) {
-    console.log(inputValues);
-
     try {
       const resLogin = await login(inputValues);
-      console.log("resLogin", resLogin);
+      console.log("resLogin", resLogin.data);
+      localStorage.setItem(resLogin.data.token.type, resLogin.data.token.token);
       navigate("/home");
     } catch (error) {
       console.log("error:", error);

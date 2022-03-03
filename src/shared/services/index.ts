@@ -1,3 +1,4 @@
 import auth from "./auth";
+import games from "./gamesRequest";
 
-export { auth };
+export { auth, games };

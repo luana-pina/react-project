@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import Games from "./pages/Games/Games";
 import Home from "./pages/Home/Home";
@@ -7,8 +7,13 @@ import Register from "./pages/Register/Register";
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
 import "./App.css";
 import NotFound from "./pages/NotFound/NotFound";
+import { useDispatch } from "react-redux";
+import { gamesActions } from "./store/games-slice";
+import { games } from "./shared/services";
 
 function App() {
+  const dispatch = useDispatch();
+
   return (
     <div className="App">
       <Routes>
