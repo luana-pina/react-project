@@ -1,33 +1,35 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import GameCard from "../GameCard/GameCard";
 import Card from "../UI/Card/Card";
 import { RightArrow } from "../UI/Arrows/Arrows";
 import { CartItems, CartTitle, CartTotal, TextButton } from "./styles";
-import { ICardGame } from "../../shared/interfaces";
+import { IRootState } from "../../shared/interfaces";
+import { useSelector } from "react-redux";
 
-const Cart: React.FC<{ listItems: ICardGame[] }> = (props) => {
+const Cart: React.FC = (props) => {
   const navigate = useNavigate();
-  const [totalCart, setTotalCart] = useState<number>();
-  const [listItems, setListItems] = useState<ICardGame[]>(props.listItems);
+  const cartGames = useSelector((state: IRootState) => state.cart.cardGames);
+  const totalCart = useSelector((state: IRootState) => state.cart.totalAmound);
 
-  function deleteGameCard(cardId: number): void {
-    let newListItems = [...listItems];
-    newListItems.forEach((item, index) => {
-      if (item.id === cardId) {
-        newListItems.splice(index, 1);
+  function convertToReal() {
+    let valueString = String(totalCart);
+    let convert;
+    let cents;
+    if (valueString.indexOf(".") !== -1) {
+      convert = valueString.replace(".", ",").split("");
+      let separate = convert.indexOf(",");
+      cents = convert.splice(separate);
+      while (cents.length < 3) {
+        cents.push("0");
       }
-    });
-    setListItems(newListItems);
+      convert.push(cents.join(""));
+      return convert.join("");
+    }
+    cents = ",00";
+    valueString += cents;
+    return valueString;
   }
-
-  useEffect(() => {
-    let totalAmount: number = 0;
-    listItems.forEach((item) => {
-      totalAmount += item.price;
-    });
-    setTotalCart(totalAmount);
-  }, [listItems, setTotalCart]);
 
   return (
     <>
@@ -41,14 +43,12 @@ const Cart: React.FC<{ listItems: ICardGame[] }> = (props) => {
       >
         <CartTitle>Cart</CartTitle>
         <CartItems>
-          {listItems.map((item) => {
-            return (
-              <GameCard key={item.id} item={item} delete={deleteGameCard} />
-            );
+          {cartGames.map((item) => {
+            return <GameCard key={item.id} item={item} delete={true} />;
           })}
         </CartItems>
         <CartTotal>
-          <span>Cart</span> Total: R$ {totalCart}
+          <span>Cart</span> Total: R$ {convertToReal()}
         </CartTotal>
       </Card>
       <Card
@@ -62,7 +62,7 @@ const Cart: React.FC<{ listItems: ICardGame[] }> = (props) => {
           height: "8vw",
         }}
       >
-        <TextButton onClick={() => navigate("/")}>
+        <TextButton onClick={() => navigate("/home")}>
           Save <RightArrow color="#27C383" size={35} />
         </TextButton>
       </Card>

@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Content } from "../../pages/Games/styles";
-import { IGame, IRootState } from "../../shared/interfaces";
+import { IRootState } from "../../shared/interfaces";
 import { GameButton } from "./styles";
 
 const GamesButtons: React.FC<{
@@ -13,8 +13,6 @@ const GamesButtons: React.FC<{
   const params = useParams();
   const gameId = Number(params.gameId);
   const gamesList = useSelector((state: IRootState) => state.games.gamesType);
-
-  console.log("in games button", gamesList);
 
   const buttonsList = gamesList.map((item) => {
     return (

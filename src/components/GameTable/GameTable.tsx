@@ -2,7 +2,11 @@ import React from "react";
 import NumberButton from "./NumberButton/NumberButton";
 import { Table } from "./styles";
 
-const GameTable: React.FC<{ range: number; color: string }> = (props) => {
+const GameTable: React.FC<{
+  range: number;
+  color: string;
+  selectHandler: Function;
+}> = (props) => {
   const rowNumber: number = Math.trunc(props.range / 10);
   const Lines = [];
   let buttonsNumber: number = props.range;
@@ -16,6 +20,7 @@ const GameTable: React.FC<{ range: number; color: string }> = (props) => {
           key={count}
           value={props.range - buttonsNumber + 1}
           color={props.color}
+          selectHandler={props.selectHandler}
         />
       );
       count++;

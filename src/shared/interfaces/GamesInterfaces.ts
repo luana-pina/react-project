@@ -29,13 +29,19 @@ export interface ICardGame {
   created_at: Date;
   type: GameType;
 }
+export interface ICardGameCart {
+  id: number;
+  choosen_numbers: string;
+  price: number;
+  type: GameType;
+}
 
 interface GameType {
   id: number;
   type: string;
 }
 
-export interface INewCardGame {
+export interface ICartGamesBody {
   game_id: number;
   numbers: number[];
 }

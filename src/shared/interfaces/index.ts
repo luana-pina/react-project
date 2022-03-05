@@ -3,7 +3,8 @@ export type {
   IGamesList,
   INewGameBody,
   IGame,
-  INewCardGame,
+  ICartGamesBody,
   ICardGame,
+  ICardGameCart,
 } from "./GamesInterfaces";
 export type { IRootState } from "./ReduxInterfaces";

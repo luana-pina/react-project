@@ -3,6 +3,7 @@ import { IoTrashOutline } from "react-icons/io5";
 
 export const DeleteIcon = styled(IoTrashOutline)`
   cursor: pointer;
+  align-self: center;
   color: #888888;
   :active {
     position: relative;
@@ -20,7 +21,7 @@ export const CardWrapper = styled.div`
 export const CardContent = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 80%;
   padding: 10px;
   margin-left: 5px;
   margin-top: 10px;

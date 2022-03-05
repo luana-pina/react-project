@@ -17,7 +17,6 @@ function Login() {
   async function handleSubmit(e: React.FormEvent) {
     try {
       const resLogin = await login(inputValues);
-      console.log("resLogin", resLogin.data);
       localStorage.setItem(resLogin.data.token.type, resLogin.data.token.token);
       navigate("/home");
     } catch (error) {

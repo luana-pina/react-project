@@ -2,9 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ButtonTable } from "./style";
 
-const NumberButton: React.FC<{ value: number; color: string }> = (props) => {
+const NumberButton: React.FC<{
+  value: number;
+  color: string;
+  selectHandler: Function;
+}> = (props) => {
   const [isSelected, setIsSelected] = useState(false);
   const params = useParams();
+
   useEffect(() => {
     setIsSelected(false);
   }, [params]);
@@ -14,7 +19,10 @@ const NumberButton: React.FC<{ value: number; color: string }> = (props) => {
       <ButtonTable
         isSelected={isSelected}
         color={props.color}
-        onClick={() => setIsSelected(!isSelected)}
+        onClick={() => {
+          props.selectHandler(props.value);
+          setIsSelected(!isSelected);
+        }}
       >
         {props.value}
       </ButtonTable>
