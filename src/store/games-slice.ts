@@ -5,7 +5,7 @@ const gamesSlice = createSlice({
   name: "games",
   initialState: {
     gamesType: Array<IGame>(),
-    recentGames: Array<ICardGame>(),
+    recentGames: Array<ICardGame[]>(),
     gameSelected: {},
   },
   reducers: {

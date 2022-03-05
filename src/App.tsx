@@ -13,6 +13,24 @@ import { games } from "./shared/services";
 
 function App() {
   const dispatch = useDispatch();
+  const { getGamesTypes } = games();
+
+  useEffect(() => {
+    async function getGamesList() {
+      try {
+        const resGamesRequest = await getGamesTypes();
+        dispatch(
+          gamesActions.getSelectedGame({
+            requestData: resGamesRequest.data.types,
+          })
+        );
+      } catch (error) {
+        console.log("error:", error);
+      }
+    }
+    getGamesList();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="App">

@@ -18,17 +18,9 @@ import {
   TopContent,
 } from "./styles";
 
-type GamesArray = Array<{
-  id: string;
-  gameId: string;
-  gameName: string;
-  color: string;
-  price: number;
-  selectedNumbers: number[];
-}>;
-
 function Home() {
-  const [filtered, setFiltered] = useState<ICardGame[]>();
+  const [filtered, setFiltered] = useState<ICardGame[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
   const params = useParams();
   const gameId: string | undefined = params["*"];
   const navigate = useNavigate();
@@ -39,33 +31,21 @@ function Home() {
     (state: IRootState) => state.games.recentGames
   );
 
-  const { getGamesTypes } = games();
-
   useEffect(() => {
-    async function getGamesList() {
+    async function getRecentGamesList() {
       try {
-        const resGamesRequest = await getGamesTypes();
+        const resGamesRequest = await getRecentGames();
         dispatch(
-          gamesActions.getSelectedGame({
-            requestData: resGamesRequest.data.types,
-          })
+          gamesActions.getRecentGames({ requestData: resGamesRequest.data })
         );
       } catch (error) {
         console.log("error:", error);
       }
     }
-    getGamesList();
-    async function getRecentGamesList() {
-      try {
-        const resGamesRequest = await getRecentGames();
-        console.log(resGamesRequest);
-        dispatch(gamesActions.getRecentGames(resGamesRequest.data));
-      } catch (error) {
-        console.log("error:", error);
-      }
-    }
     getRecentGamesList();
-  }, [dispatch, getRecentGames, getGamesTypes]);
+    setLoading(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch]);
 
   useEffect(() => {
     function gamesFilter(gamesList: ICardGame[]) {
@@ -103,37 +83,41 @@ function Home() {
             <GamesButtons width="6rem" height="1.5rem" to={changeSelect} />
           </Filters>
         </LeftContent>
-        <NewBet to={`/games/${gamesList[0].id}`}>
-          New Bet <RightArrow color="#B5C401" />
-        </NewBet>
+        {gamesList.length > 0 && (
+          <NewBet to={`/games/${gamesList[0].id}`}>
+            New Bet <RightArrow color="#B5C401" />
+          </NewBet>
+        )}
       </TopContent>
-      <Routes>
-        <Route
-          path="/:gameId"
-          element={
-            <RecentGames>
-              {filtered ? (
-                filtered.map((item) => {
-                  return <GameCard key={item.id} item={item} />;
-                })
-              ) : (
-                <p>Not found games!</p>
-              )}
-            </RecentGames>
-          }
-        />
-        <Route
-          path="/"
-          element={
-            <RecentGames>
-              {recentGames.length > 0 &&
-                recentGames.map((item) => {
-                  return <GameCard key={item.id} item={item} />;
-                })}
-            </RecentGames>
-          }
-        />
-      </Routes>
+      {loading && (
+        <Routes>
+          <Route
+            path="/:gameId"
+            element={
+              <RecentGames>
+                {filtered.length > 0 ? (
+                  filtered.map((item) => {
+                    return <GameCard key={item.id} item={item} />;
+                  })
+                ) : (
+                  <p>Not found games!</p>
+                )}
+              </RecentGames>
+            }
+          />
+          <Route
+            path="/"
+            element={
+              <RecentGames>
+                {recentGames &&
+                  recentGames.map((item) => {
+                    return <GameCard key={item.id} item={item} />;
+                  })}
+              </RecentGames>
+            }
+          />
+        </Routes>
+      )}
     </Layout>
   );
 }
