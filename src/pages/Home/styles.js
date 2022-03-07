@@ -13,6 +13,12 @@ export const Filters = styled.div`
   flex-direction: row;
   align-items: center;
 `;
+export const FilterResult = styled.div`
+  display: flex;
+  width: auto;
+  flex-direction: row;
+  align-items: center;
+`;
 export const RecentGames = styled.div`
   display: flex;
   width: 40%;
@@ -44,6 +50,15 @@ export const Label = styled.p`
   color: #868686;
   letter-spacing: 0px;
   margin-right: 2%;
+`;
+export const NotFoundText = styled.p`
+  width: fit-content;
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 100;
+  color: #868686;
+  letter-spacing: 0px;
+  margin-top: 0px;
 `;
 export const NewBet = styled(Link)`
   width: fit-content;

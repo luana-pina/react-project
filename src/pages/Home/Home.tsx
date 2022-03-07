@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { MdOutlineSearchOff } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes, useNavigate, useParams } from "react-router-dom";
 import GameCard from "../../components/GameCard/GameCard";
@@ -16,6 +17,8 @@ import {
   PageTitle,
   RecentGames,
   TopContent,
+  FilterResult,
+  NotFoundText,
 } from "./styles";
 
 function Home() {
@@ -100,7 +103,10 @@ function Home() {
                     return <GameCard key={item.id} item={item} />;
                   })
                 ) : (
-                  <p>Not found games!</p>
+                  <FilterResult>
+                    <MdOutlineSearchOff size={20} color="#868686" />
+                    <NotFoundText>Not found games!</NotFoundText>
+                  </FilterResult>
                 )}
               </RecentGames>
             }
