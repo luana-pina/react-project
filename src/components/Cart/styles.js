@@ -37,7 +37,7 @@ export const TextButton = styled.p`
 `;
 
 export const CartItems = styled.div`
-  max-height: 81%;
+  max-height: 60%;
   width: 100%;
   text-align: center;
   color: #868686;

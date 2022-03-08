@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import React from "react";
+import { useSelector } from "react-redux";
+import { IRootState } from "../../../shared/interfaces";
 import { ButtonTable } from "./style";
 
 const NumberButton: React.FC<{
@@ -7,21 +8,17 @@ const NumberButton: React.FC<{
   color: string;
   selectHandler: Function;
 }> = (props) => {
-  const [isSelected, setIsSelected] = useState(false);
-  const params = useParams();
-
-  useEffect(() => {
-    setIsSelected(false);
-  }, [params]);
+  const cardNumbers = useSelector(
+    (state: IRootState) => state.cardGame.card.choosen_numbers
+  );
 
   return (
     <td>
       <ButtonTable
-        isSelected={isSelected}
+        isSelected={cardNumbers.some((item) => item === props.value)}
         color={props.color}
         onClick={() => {
           props.selectHandler(props.value);
-          setIsSelected(!isSelected);
         }}
       >
         {props.value}

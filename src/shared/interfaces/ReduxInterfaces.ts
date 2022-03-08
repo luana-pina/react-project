@@ -4,24 +4,23 @@ export interface IRootState {
   cart: cart;
   games: games;
   cardGame: card;
-  popup: popup;
+  login: login;
 }
 
-interface popup {
-  opacity: number;
-  message: string;
-  type: string;
+interface login {
+  isLogin: boolean;
 }
 interface card {
   clear: boolean;
   card: {
     id: number;
-    choosen_numbers: string;
+    choosen_numbers: number[];
     price: number;
     type: { type: string; id: number };
   };
 }
 interface cart {
+  min_cart_value: number;
   cardGames: Array<ICardGameCart>;
   totalAmound: 0;
 }

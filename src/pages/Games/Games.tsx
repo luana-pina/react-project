@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Content,
   Description,
@@ -19,7 +19,7 @@ import { games } from "../../shared/services";
 import { IRootState } from "../../shared/interfaces";
 import { gamesActions } from "../../store/games-slice";
 import { cardGameActions } from "../../store/game-card-slice";
-import { popupActions } from "../../store/popup-slice";
+import { toast } from "react-toastify";
 
 const Games: React.FC = () => {
   const params = useParams();
@@ -27,8 +27,12 @@ const Games: React.FC = () => {
   const history = useNavigate();
   const game = useSelector((state: IRootState) => state.games.gameSelected);
   const dispatch = useDispatch();
-  const selectedNumbers: number[] = [];
+  const selectedNumbers: number[] = useSelector(
+    (state: IRootState) => state.cardGame.card.choosen_numbers
+  );
+  const isLogin = localStorage.getItem("bearer");
   const { getGamesTypes } = games();
+  const navigate = useNavigate();
 
   async function getGamesList(gameId: number) {
     try {
@@ -40,10 +44,21 @@ const Games: React.FC = () => {
         })
       );
     } catch (error) {
-      console.log("error:", error);
+      toast.error("Failed Request!", {
+        position: toast.POSITION.TOP_CENTER,
+        draggable: false,
+      });
     }
   }
   useEffect(() => {
+    if (!isLogin) {
+      toast.error("Log in to access this page!", {
+        position: toast.POSITION.TOP_CENTER,
+        draggable: false,
+      });
+      navigate("/login");
+      return;
+    }
     getGamesList(Number(gameId));
     dispatch(cardGameActions.clearCard());
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -58,27 +73,19 @@ const Games: React.FC = () => {
   function selectHandler(buttonId: number) {
     if (!selectedNumbers.some((item) => item === buttonId)) {
       if (selectedNumbers.length < game.max_number) {
-        selectedNumbers.push(buttonId);
+        dispatch(cardGameActions.addNumber({ newNumber: buttonId }));
       } else {
-        dispatch(
-          popupActions.showPopup({
-            type: "error",
-            message: "Limite de números atingido!",
-          })
-        );
-        setTimeout(() => dispatch(popupActions.hidePopup()), 3000);
+        toast.error("Can't select more numbers!", {
+          position: toast.POSITION.TOP_CENTER,
+          draggable: false,
+        });
       }
     } else {
-      selectedNumbers.forEach((item, index) => {
-        if (item === buttonId) {
-          selectedNumbers.splice(index, 1);
-        }
-      });
+      dispatch(cardGameActions.removeNumber({ number: buttonId }));
     }
     dispatch(
       cardGameActions.addCardInfo({
         id: Math.floor(Math.random() * (99 - 1 + 1) + 1),
-        newNumbers: selectedNumbers,
         price: game.price,
         type: { type: game.type, id: game.id },
       })
@@ -88,27 +95,20 @@ const Games: React.FC = () => {
   function completeGameHandler() {
     let maxNumber = game.range;
     let times = game.max_number;
+    const numbersArray = [...selectedNumbers];
     let numb: number;
     let cont = 0;
-    selectedNumbers.pop();
     if (selectedNumbers.length !== 0) {
       cont = selectedNumbers.length;
     }
-    while (cont <= times) {
+    while (cont < times) {
       numb = Math.floor(Math.random() * maxNumber + 1);
-      if (!selectedNumbers.some((item) => item === numb)) {
-        selectedNumbers.push(numb);
+      if (!numbersArray.some((item) => item === numb)) {
+        selectHandler(numb);
+        numbersArray.push(numb);
         cont++;
       }
     }
-    dispatch(
-      cardGameActions.addCardInfo({
-        id: Math.floor(Math.random() * (99 - 1 + 1) + 1),
-        newNumbers: selectedNumbers,
-        price: game.price,
-        type: { type: game.type, id: game.id },
-      })
-    );
   }
 
   return (

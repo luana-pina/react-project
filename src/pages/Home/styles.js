@@ -6,16 +6,11 @@ export const TopContent = styled.div`
   width: 100%;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 `;
 export const Filters = styled.div`
   display: flex;
   width: fit-content;
-  flex-direction: row;
-  align-items: center;
-`;
-export const FilterResult = styled.div`
-  display: flex;
-  width: auto;
   flex-direction: row;
   align-items: center;
 `;
@@ -35,7 +30,7 @@ export const LeftContent = styled.div`
 
 export const PageTitle = styled.p`
   width: fit-content;
-  font-size: 23px;
+  font-size: 28px;
   font-style: italic;
   font-weight: bold;
   text-transform: uppercase;
@@ -44,28 +39,22 @@ export const PageTitle = styled.p`
 `;
 export const Label = styled.p`
   width: fit-content;
-  font-size: 15px;
+  font-size: 19px;
   font-style: italic;
   font-weight: 100;
   color: #868686;
   letter-spacing: 0px;
   margin-right: 2%;
 `;
-export const NotFoundText = styled.p`
-  width: fit-content;
-  font-size: 20px;
-  font-style: italic;
-  font-weight: 100;
-  color: #868686;
-  letter-spacing: 0px;
-  margin-top: 0px;
-`;
+
 export const NewBet = styled(Link)`
+  display: flex;
   width: fit-content;
-  font-size: 23px;
+  font-size: 28px;
   font-style: italic;
   font-weight: bold;
   color: #b5c401;
   letter-spacing: 0px;
   text-decoration: none;
+  justify-content: center;
 `;

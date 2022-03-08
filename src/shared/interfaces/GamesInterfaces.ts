@@ -24,14 +24,14 @@ export interface ICardGame {
   id: number;
   user_id: number;
   game_id: number;
-  choosen_numbers: string;
+  choosen_numbers: number[];
   price: number;
   created_at: Date;
   type: GameType;
 }
 export interface ICardGameCart {
   id: number;
-  choosen_numbers: string;
+  choosen_numbers: number[];
   price: number;
   type: GameType;
 }

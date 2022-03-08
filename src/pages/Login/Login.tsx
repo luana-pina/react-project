@@ -1,26 +1,55 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import Base from "../../components/Base/Base";
 import Card from "../../components/UI/Card/Card";
 import Form from "../../components/UI/Form/Form";
-import { IBodyAuth } from "../../shared/interfaces";
+import { IBodyLogin } from "../../shared/interfaces";
 import { auth } from "../../shared/services";
+import { loginActions } from "../../store/login-slice";
 
 function Login() {
-  const [inputValues, setInputValues] = useState<IBodyAuth>({
+  const [inputValues, setInputValues] = useState<IBodyLogin>({
     email: "",
     password: "",
   });
   const navigate = useNavigate();
   const { login } = auth();
+  const dispatch = useDispatch();
 
   async function handleSubmit(e: React.FormEvent) {
+    const requestPopup = toast.loading("Loading...", {
+      position: toast.POSITION.TOP_CENTER,
+    });
     try {
-      const resLogin = await login(inputValues);
-      localStorage.setItem(resLogin.data.token.type, resLogin.data.token.token);
-      navigate("/home");
+      await login(inputValues).then((res) => {
+        toast.update(requestPopup, {
+          render: "User logged successfully",
+          type: "success",
+          isLoading: false,
+          autoClose: 2000,
+        });
+        localStorage.setItem(res.data.token.type, res.data.token.token);
+        dispatch(loginActions.isLoginHandler());
+        navigate("/home");
+      });
     } catch (error) {
-      console.log("error:", error);
+      if (`${error}`.match("401")) {
+        toast.update(requestPopup, {
+          render: "Invalid credentials",
+          type: "error",
+          isLoading: false,
+          autoClose: 2000,
+        });
+      } else {
+        toast.update(requestPopup, {
+          render: "Request to failed!",
+          type: "error",
+          isLoading: false,
+          autoClose: 2000,
+        });
+      }
     }
   }
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -37,7 +66,7 @@ function Login() {
         style={{
           borderBottomLeftRadius: "0px",
           borderBottomRightRadius: "0px",
-          width: "60%",
+          width: "50%",
           alignItems: "center",
         }}
       >
@@ -53,7 +82,7 @@ function Login() {
           borderTopLeftRadius: "0px",
           borderBottomRightRadius: "0px",
           borderTopRightRadius: "0px",
-          width: "60%",
+          width: "50%",
           alignItems: "center",
         }}
       >

@@ -10,8 +10,8 @@ export const Content = styled.div`
 `;
 
 export const ActionsGame = styled.button`
-  width: 13vw;
-  height: 4vw;
+  width: 10vw;
+  height: 7vh;
   border-radius: 10px;
   border: 1px solid #27c383;
   color: #27c383;
@@ -33,8 +33,8 @@ export const AddCart = styled.button`
   align-items: center;
   flex-direction: row;
   justify-content: space-evenly;
-  width: 14vw;
-  height: 4vw;
+  width: 12vw;
+  height: 7vh;
   border-radius: 10px;
   border: 1px solid #27c383;
   background-color: #27c383;

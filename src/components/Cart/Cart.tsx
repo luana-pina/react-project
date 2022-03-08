@@ -1,16 +1,22 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import GameCard from "../GameCard/GameCard";
 import Card from "../UI/Card/Card";
 import { RightArrow } from "../UI/Arrows/Arrows";
 import { CartItems, CartTitle, CartTotal, TextButton } from "./styles";
-import { IRootState } from "../../shared/interfaces";
-import { useSelector } from "react-redux";
+import { ICartGamesBody, IRootState } from "../../shared/interfaces";
+import { useDispatch, useSelector } from "react-redux";
+import { cart } from "../../shared/services";
+import { toast } from "react-toastify";
+import { cartActions } from "../../store/cart-slice";
+import NotFoundGames from "../UI/NotFoundGames/NotFoundGames";
+import { useNavigate } from "react-router-dom";
 
 const Cart: React.FC = (props) => {
-  const navigate = useNavigate();
-  const cartGames = useSelector((state: IRootState) => state.cart.cardGames);
+  const cartData = useSelector((state: IRootState) => state.cart);
   const totalCart = useSelector((state: IRootState) => state.cart.totalAmound);
+  const { sendCart } = cart();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   function convertToReal() {
     let valueString = String(totalCart);
@@ -31,21 +37,63 @@ const Cart: React.FC = (props) => {
     return valueString;
   }
 
+  async function saveCartHandler() {
+    const cartGamesBody: ICartGamesBody[] = [];
+    cartData.cardGames.forEach((item) => {
+      cartGamesBody.push({
+        game_id: item.type.id,
+        numbers: item.choosen_numbers,
+      });
+    });
+    if (cartData.totalAmound >= cartData.min_cart_value) {
+      const requestPopup = toast.loading("Send games...", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+      try {
+        await sendCart({ games: cartGamesBody });
+        dispatch(cartActions.clearCart());
+        toast.update(requestPopup, {
+          render: "Games sended successfully!",
+          type: "success",
+          isLoading: false,
+          autoClose: 2000,
+        });
+        navigate("/home");
+      } catch (error) {
+        toast.update(requestPopup, {
+          render: "Request to failed!",
+          type: "error",
+          isLoading: false,
+          autoClose: 2000,
+        });
+      }
+    } else {
+      toast.error("The value min authorized is R$30,00", {
+        position: toast.POSITION.TOP_CENTER,
+        draggable: false,
+      });
+    }
+  }
+
   return (
     <>
       <Card
         style={{
           borderBottomLeftRadius: "0px",
           borderBottomRightRadius: "0px",
-          width: "80%",
-          maxHeight: "75vh",
+          width: "70%",
+          maxHeight: "55vh",
         }}
       >
         <CartTitle>Cart</CartTitle>
         <CartItems>
-          {cartGames.map((item) => {
-            return <GameCard key={item.id} item={item} delete={true} />;
-          })}
+          {cartData.cardGames.length === 0 ? (
+            <NotFoundGames isCart={true} />
+          ) : (
+            cartData.cardGames.map((item) => {
+              return <GameCard key={item.id} item={item} delete={true} />;
+            })
+          )}
         </CartItems>
         <CartTotal>
           <span>Cart</span> Total: R$ {convertToReal()}
@@ -58,11 +106,11 @@ const Cart: React.FC = (props) => {
           direction: "row",
           color: "#F4F4F4",
           alignItems: "center",
-          width: "80%",
-          height: "8vw",
+          width: "70%",
+          height: "15vh",
         }}
       >
-        <TextButton onClick={() => navigate("/home")}>
+        <TextButton onClick={saveCartHandler}>
           Save <RightArrow color="#27C383" size={35} />
         </TextButton>
       </Card>

@@ -9,7 +9,6 @@ function ResetPassword() {
   const [inputValues, setInputValues] = useState({});
 
   function handleSubmit(e: React.FormEvent) {
-    console.log(inputValues);
     navigate("/login");
   }
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {

@@ -1,4 +1,9 @@
-export interface IBodyAuth {
+export interface IBodyLogin {
+  email: string;
+  password: string;
+}
+export interface IBodyRegister {
+  name: string;
   email: string;
   password: string;
 }

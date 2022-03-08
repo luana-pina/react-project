@@ -46,6 +46,21 @@ export const GameName = styled.p`
   font-weight: 600;
   color: ${(props) => props.color};
 `;
+export const ModalTitle = styled.p`
+  width: max-content;
+  font-size: 22px;
+  font-style: italic;
+  font-weight: bold;
+  color: #868686;
+  margin: 0px;
+`;
+export const ModalText = styled.p`
+  width: fit-content;
+  font-size: 18px;
+  font-style: italic;
+  font-weight: 100;
+  color: #868686;
+`;
 export const Price = styled.p`
   margin-top: 10px;
   margin-bottom: 0px;
@@ -59,4 +74,31 @@ export const InfoCard = styled.div`
   display: flex;
   flex-direction: row;
   margin: 0px;
+`;
+export const ButtonsArea = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: left;
+  align-self: baseline;
+  margin: 0px;
+`;
+
+export const ModalButton = styled.button`
+  width: 5rem;
+  padding: 2%;
+  height: auto;
+  border-radius: 1rem;
+  border: 2px solid ${(props) => props.color};
+  color: #ffffff;
+  background-color: ${(props) => props.color};
+  font-size: 15px;
+  font-weight: 600;
+  margin-right: 4%;
+  cursor: pointer;
+  :active {
+    position: relative;
+    top: 3px;
+    box-shadow: none;
+  }
 `;

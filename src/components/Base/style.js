@@ -4,7 +4,7 @@ import styled from "styled-components/macro";
 export const BottomText = styled.p`
   text-align: center;
   width: max-content;
-  font-size: 75px;
+  font-size: 80px;
   font-style: italic;
   font-weight: bold;
   text-transform: uppercase;
@@ -20,15 +20,15 @@ export const PageTitle = styled.p`
   color: #707070;
 `;
 export const DecoratedText = styled.div`
-  font-size: 20px;
+  font-size: 22px;
   font-style: italic;
   font-weight: 600;
-  width: 8rem;
-  height: 2.2rem;
+  width: 8.5rem;
+  height: 3rem;
   background-color: #b5c401;
   border-radius: 80px;
   text-align: center;
-  line-height: 2.2rem;
+  line-height: 3rem;
   color: #ffffff;
   margin: 0;
 `;
@@ -39,6 +39,7 @@ export const TextContent = styled.div`
   align-items: center;
   width: 50%;
   padding: 2% 0;
+  max-height: 550px;
   height: 70%;
 `;
 export const Content = styled.div`
@@ -52,7 +53,7 @@ export const Content = styled.div`
 export const UpperText = styled.p`
   text-align: center;
   width: min-content;
-  font-size: 55px;
+  font-size: 75px;
   font-style: italic;
   font-weight: bold;
   margin: 0;

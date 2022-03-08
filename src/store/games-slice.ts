@@ -5,7 +5,7 @@ const gamesSlice = createSlice({
   name: "games",
   initialState: {
     gamesType: Array<IGame>(),
-    recentGames: Array<ICardGame[]>(),
+    recentGames: Array<ICardGame>(),
     gameSelected: {},
   },
   reducers: {
@@ -22,7 +22,29 @@ const gamesSlice = createSlice({
     },
     getRecentGames(state, action) {
       const { requestData } = action.payload;
-      state.recentGames = requestData;
+      requestData.forEach(
+        (item: {
+          id: number;
+          user_id: number;
+          game_id: number;
+          choosen_numbers: string;
+          price: number;
+          created_at: Date;
+          type: { id: number; type: string };
+        }) => {
+          const numbersArray: number[] = [];
+          const stringsArray = item.choosen_numbers.split(",");
+          stringsArray.forEach((item) => {
+            numbersArray.push(Number(item));
+          });
+          state.recentGames.push({ ...item, choosen_numbers: numbersArray });
+        }
+      );
+    },
+    clearData(state) {
+      state.gamesType = Array<IGame>();
+      state.recentGames = Array<ICardGame>();
+      state.gameSelected = {};
     },
   },
 });

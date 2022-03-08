@@ -37,7 +37,7 @@ const Base: React.FC<{
           style={{
             borderTopLeftRadius: "0px",
             borderTopRightRadius: "0px",
-            width: "60%",
+            width: "50%",
             alignItems: "center",
           }}
         >

@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 import { MdOutlineSearchOff } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes, useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import GameCard from "../../components/GameCard/GameCard";
 import GamesButtons from "../../components/GamesButtons/GamesButtons";
 import Layout from "../../components/Layout/Layout";
 import { RightArrow } from "../../components/UI/Arrows/Arrows";
+import Loading from "../../components/UI/Loading/Loading";
+import NotFoundGames from "../../components/UI/NotFoundGames/NotFoundGames";
 import { ICardGame, IRootState } from "../../shared/interfaces";
 import { games } from "../../shared/services";
 import { gamesActions } from "../../store/games-slice";
@@ -17,38 +20,50 @@ import {
   PageTitle,
   RecentGames,
   TopContent,
-  FilterResult,
-  NotFoundText,
 } from "./styles";
 
 function Home() {
   const [filtered, setFiltered] = useState<ICardGame[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const params = useParams();
   const gameId: string | undefined = params["*"];
   const navigate = useNavigate();
   const { getRecentGames } = games();
   const dispatch = useDispatch();
   const gamesList = useSelector((state: IRootState) => state.games.gamesType);
+  const isLogin = localStorage.getItem("bearer");
   const recentGames = useSelector(
     (state: IRootState) => state.games.recentGames
   );
 
   useEffect(() => {
+    if (!isLogin) {
+      toast.error("Log in to access this page!", {
+        position: toast.POSITION.TOP_CENTER,
+        draggable: false,
+      });
+      navigate("/login");
+      return;
+    }
     async function getRecentGamesList() {
-      try {
-        const resGamesRequest = await getRecentGames();
-        dispatch(
-          gamesActions.getRecentGames({ requestData: resGamesRequest.data })
-        );
-      } catch (error) {
-        console.log("error:", error);
-      }
+      await getRecentGames()
+        .then((res) => {
+          dispatch(gamesActions.getRecentGames({ requestData: res.data }));
+        })
+        .catch((error) => {
+          toast.error("Request to failed!", {
+            position: toast.POSITION.TOP_CENTER,
+            draggable: false,
+          });
+        })
+        .finally(() => {
+          setLoading(false);
+        });
     }
     getRecentGamesList();
     setLoading(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch]);
+  }, [dispatch, isLogin]);
 
   useEffect(() => {
     function gamesFilter(gamesList: ICardGame[]) {
@@ -60,7 +75,9 @@ function Home() {
         if (a.type.type < b.type.type) return -1;
         return 0;
       });
-      setFiltered(filter);
+      filter.length > 0 || gameId
+        ? setFiltered(filter)
+        : setFiltered(gamesList);
     }
 
     gamesFilter(recentGames);
@@ -83,46 +100,26 @@ function Home() {
           <PageTitle>Recent Games</PageTitle>
           <Filters>
             <Label>Filters</Label>
-            <GamesButtons width="6rem" height="1.5rem" to={changeSelect} />
+            <GamesButtons width="6.5rem" height="1.9rem" to={changeSelect} />
           </Filters>
         </LeftContent>
         {gamesList.length > 0 && (
           <NewBet to={`/games/${gamesList[0].id}`}>
-            New Bet <RightArrow color="#B5C401" />
+            New Bet <RightArrow color="#B5C401" size={30} />
           </NewBet>
         )}
       </TopContent>
-      {loading && (
-        <Routes>
-          <Route
-            path="/:gameId"
-            element={
-              <RecentGames>
-                {filtered.length > 0 ? (
-                  filtered.map((item) => {
-                    return <GameCard key={item.id} item={item} />;
-                  })
-                ) : (
-                  <FilterResult>
-                    <MdOutlineSearchOff size={20} color="#868686" />
-                    <NotFoundText>Not found games!</NotFoundText>
-                  </FilterResult>
-                )}
-              </RecentGames>
-            }
-          />
-          <Route
-            path="/"
-            element={
-              <RecentGames>
-                {recentGames &&
-                  recentGames.map((item) => {
-                    return <GameCard key={item.id} item={item} />;
-                  })}
-              </RecentGames>
-            }
-          />
-        </Routes>
+      {loading && <Loading />}
+      {!loading && (
+        <RecentGames>
+          {filtered.length > 0 ? (
+            filtered.map((item) => {
+              return <GameCard key={item.id} item={item} />;
+            })
+          ) : (
+            <NotFoundGames />
+          )}
+        </RecentGames>
       )}
     </Layout>
   );

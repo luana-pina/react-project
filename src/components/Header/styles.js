@@ -8,15 +8,16 @@ export const Wrapper = styled.header`
   padding-left: 10%;
   padding-right: 10%;
   padding-top: 0.8%;
-  height: 5vw;
+  height: 10vh;
+  max-height: 75px;
   box-shadow: 0px 0px 3px 2px #ebebeb;
 `;
 export const Line = styled.div`
   position: absolute;
-  top: 5.5vw;
+  top: 9.3vh;
   left: 9.3vw;
   background-color: #b5c401;
-  width: 8.2vw;
+  width: 7vw;
   height: 7px;
   border-radius: 6px;
 `;
@@ -59,7 +60,7 @@ export const NavIcon = styled.h4`
   font-weight: 700;
   font-style: oblique;
   color: #707070;
-  font-size: 20px;
+  font-size: 25px;
   cursor: pointer;
   text-decoration: none;
 `;

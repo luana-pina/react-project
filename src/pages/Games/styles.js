@@ -18,7 +18,7 @@ export const RightContent = styled.div`
   width: 36%;
 `;
 export const PageTitle = styled.h3`
-  font-size: 23px;
+  font-size: 27px;
   font-style: italic;
   font-weight: 100;
   text-transform: uppercase;
@@ -27,19 +27,19 @@ export const PageTitle = styled.h3`
 `;
 export const Subtitle = styled.p`
   font-style: italic;
-  font-size: 17px;
+  font-size: 20px;
   color: #868686;
   font-weight: 600;
 `;
 export const DescriptionTitle = styled.p`
-  font-size: 18px;
+  font-size: 20px;
   color: #868686;
   font-weight: 600;
   font-style: italic;
   margin-bottom: 0px;
 `;
 export const Description = styled.p`
-  font-size: 18px;
+  font-size: 20px;
   color: #868686;
   font-style: italic;
   margin-top: 2px;

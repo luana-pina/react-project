@@ -8,13 +8,13 @@ export const Content = styled.div`
 `;
 
 export const GameButton = styled.button`
-  font-size: 14px;
+  font-size: 16px;
   font-style: italic;
   text-align: center;
   text-decoration: none;
   font-weight: 600;
-  width: ${(props) => (props.width ? props.width : "8vw")};
-  height: ${(props) => (props.height ? props.height : "2.5vw")};
+  width: ${(props) => (props.width ? props.width : "7vw")};
+  height: ${(props) => (props.height ? props.height : "4vh")};
   border-radius: 80px;
   background-color: ${(props) => (props.active ? props.color : "#ffffff")};
   border: 2px solid ${(props) => props.color};

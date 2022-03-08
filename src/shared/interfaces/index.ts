@@ -1,4 +1,8 @@
-export type { IBodyAuth, ILoginResponse } from "./AuthInterfaces";
+export type {
+  IBodyLogin,
+  ILoginResponse,
+  IBodyRegister,
+} from "./AuthInterfaces";
 export type {
   IGamesList,
   INewGameBody,

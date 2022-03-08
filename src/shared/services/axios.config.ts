@@ -22,7 +22,7 @@ instance.interceptors.request.use(
     return Promise.reject(error);
   }
 );
-instance.interceptors.request.use(
+instance.interceptors.response.use(
   async (response) => {
     return response;
   },
