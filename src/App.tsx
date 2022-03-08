@@ -1,24 +1,25 @@
-import React, { Fragment, useEffect } from "react";
+import { cartActions } from "./store/cart-slice";
+import { games } from "./shared/services";
+import { gamesActions } from "./store/games-slice";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
+import { IRootState } from "./shared/interfaces";
 import { Navigate, Route, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import ChangePassword from "./pages/ChangePassword/ChangePassword";
 import Games from "./pages/Games/Games";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
+import NotFound from "./pages/NotFound/NotFound";
 import Register from "./pages/Register/Register";
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer } from "react-toastify";
-import NotFound from "./pages/NotFound/NotFound";
-import { useDispatch, useSelector } from "react-redux";
-import { gamesActions } from "./store/games-slice";
-import { games } from "./shared/services";
-import { cartActions } from "./store/cart-slice";
-import { toast } from "react-toastify";
-import { IRootState } from "./shared/interfaces";
 
 function App() {
-  const dispatch = useDispatch();
   const { getGamesTypes } = games();
+  const dispatch = useDispatch();
   const isLogged = useSelector((state: IRootState) => state.login.isLogin);
 
   useEffect(() => {
@@ -44,7 +45,6 @@ function App() {
       }
     }
     getGamesList();
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLogged]);
 
@@ -58,6 +58,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/games/:gameId" element={<Games />} />
         <Route path="/forgot" element={<ResetPassword />} />
+        <Route path="/forgot/:userToken" element={<ChangePassword />} />
         <Route path="/*" element={<NotFound />} />
       </Routes>
     </div>

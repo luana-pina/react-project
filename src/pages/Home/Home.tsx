@@ -1,17 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { MdOutlineSearchOff } from "react-icons/md";
-import { useDispatch, useSelector } from "react-redux";
-import { Route, Routes, useNavigate, useParams } from "react-router-dom";
+import { games } from "../../shared/services";
+import { gamesActions } from "../../store/games-slice";
+import { ICardGame, IRootState } from "../../shared/interfaces";
+import { RightArrow } from "../../components/UI/Arrows/Arrows";
 import { toast } from "react-toastify";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 import GameCard from "../../components/GameCard/GameCard";
 import GamesButtons from "../../components/GamesButtons/GamesButtons";
 import Layout from "../../components/Layout/Layout";
-import { RightArrow } from "../../components/UI/Arrows/Arrows";
 import Loading from "../../components/UI/Loading/Loading";
 import NotFoundGames from "../../components/UI/NotFoundGames/NotFoundGames";
-import { ICardGame, IRootState } from "../../shared/interfaces";
-import { games } from "../../shared/services";
-import { gamesActions } from "../../store/games-slice";
 import {
   Filters,
   Label,
@@ -25,16 +24,26 @@ import {
 function Home() {
   const [filtered, setFiltered] = useState<ICardGame[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const params = useParams();
-  const gameId: string | undefined = params["*"];
-  const navigate = useNavigate();
   const { getRecentGames } = games();
   const dispatch = useDispatch();
+  const params = useParams();
+  const gameId: string | undefined = params["*"];
   const gamesList = useSelector((state: IRootState) => state.games.gamesType);
   const isLogin = localStorage.getItem("bearer");
+  const navigate = useNavigate();
   const recentGames = useSelector(
     (state: IRootState) => state.games.recentGames
   );
+
+  function changeSelect(buttonId: string) {
+    if (gameId?.match(buttonId)) {
+      let newParams = gameId.replace(`+${buttonId}`, "");
+      navigate(`/home/${newParams}`);
+    } else {
+      let newParams = gameId?.concat(`+${buttonId}`);
+      navigate(`/home/${newParams}`);
+    }
+  }
 
   useEffect(() => {
     if (!isLogin) {
@@ -82,16 +91,6 @@ function Home() {
 
     gamesFilter(recentGames);
   }, [gameId, recentGames]);
-
-  function changeSelect(buttonId: string) {
-    if (gameId?.match(buttonId)) {
-      let newParams = gameId.replace(`+${buttonId}`, "");
-      navigate(`/home/${newParams}`);
-    } else {
-      let newParams = gameId?.concat(`+${buttonId}`);
-      navigate(`/home/${newParams}`);
-    }
-  }
 
   return (
     <Layout isHome={true}>

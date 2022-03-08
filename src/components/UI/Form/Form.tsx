@@ -1,10 +1,9 @@
 import React from "react";
-import { Input, Label } from "./style";
+import { Label } from "./style";
 
 const Form: React.FC<{
   label: string;
-  input: { type: string; id: string };
-  onChange: Function;
+  inputId: string;
 }> = (props) => {
   return (
     <div
@@ -17,12 +16,8 @@ const Form: React.FC<{
         alignItems: "center",
       }}
     >
-      <Label htmlFor={props.input.id}>{props.label}</Label>
-      <Input
-        type={props.input.type}
-        id={props.input.id}
-        onChange={props.onChange}
-      />
+      <Label htmlFor={props.inputId}>{props.label}</Label>
+      {props.children}
     </div>
   );
 };

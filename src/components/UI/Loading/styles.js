@@ -1,7 +1,7 @@
 import { BiLoaderCircle } from "react-icons/bi";
 import styled from "styled-components/macro";
 
-export const NotFoundText = styled.p`
+export const LoadingText = styled.p`
   width: fit-content;
   font-size: ${(props) => (props.isCart ? "16px" : "20px")};
   font-style: italic;

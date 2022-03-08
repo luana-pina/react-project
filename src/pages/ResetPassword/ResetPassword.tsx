@@ -1,40 +1,118 @@
-import React, { useState } from "react";
+import * as yup from "yup";
+import { auth } from "../../shared/services";
+import { toast } from "react-toastify";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { Input } from "../../components/UI/Form/style";
+import { RightArrow } from "../../components/UI/Arrows/Arrows";
+import { SubmitButton } from "../../components/Base/style";
 import Base from "../../components/Base/Base";
 import Card from "../../components/UI/Card/Card";
 import Form from "../../components/UI/Form/Form";
 
 function ResetPassword() {
+  const { handleSubmit, register } = useForm();
+  const { resetPassword } = auth();
   const navigate = useNavigate();
-  const [inputValues, setInputValues] = useState({});
+  let isValid = false;
 
-  function handleSubmit(e: React.FormEvent) {
-    navigate("/login");
+  async function handlerSubmit(inputValues: { email: string }) {
+    const requestPopup = toast.loading("Loading...", {
+      position: toast.POSITION.TOP_CENTER,
+    });
+    await isValidInputs(requestPopup, inputValues);
+    if (isValid) {
+      await resetPassword({ email: inputValues.email })
+        .then((res) => {
+          toast.update(requestPopup, {
+            isLoading: false,
+            autoClose: 100,
+          });
+          navigate(`/forgot/${res.data.token}`);
+        })
+        .catch((error) => {
+          if (`${error}`.match("404")) {
+            toast.update(requestPopup, {
+              render: "User not found!",
+              type: "error",
+              isLoading: false,
+              autoClose: 2000,
+            });
+          } else {
+            toast.update(requestPopup, {
+              render: "Request to failed!",
+              type: "error",
+              isLoading: false,
+              autoClose: 2000,
+            });
+          }
+        });
+    }
   }
-  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setInputValues({ ...inputValues, [e.target.id]: e.target.value });
+
+  async function isValidInputs(popup: any, inputValues: { email: string }) {
+    const schema = yup.object().shape({
+      email: yup
+        .string()
+        .required("Email field is required!")
+        .email("Please enter a valid email"),
+    });
+    await schema
+      .validate(inputValues)
+      .then(() => {
+        isValid = true;
+      })
+      .catch((err) => {
+        toast.update(popup, {
+          render: err.message,
+          type: "error",
+          isLoading: false,
+          autoClose: 2000,
+        });
+        isValid = false;
+      });
   }
 
   return (
-    <Base
-      submit={{ text: "Send Link", onSubmit: handleSubmit }}
-      pageTitle="Reset password"
-      back={true}
-    >
-      <Card
+    <Base pageTitle="Reset password" back={true}>
+      <form
+        onSubmit={handleSubmit((data: any) => {
+          handlerSubmit(data);
+        })}
         style={{
-          borderBottomLeftRadius: "0px",
-          borderBottomRightRadius: "0px",
-          width: "60%",
+          display: "flex",
+          flexDirection: "column",
+          width: "100%",
+          margin: "1.2rem 0",
           alignItems: "center",
         }}
       >
-        <Form
-          input={{ type: "text", id: "emailInput" }}
-          label="Email"
-          onChange={handleChange}
-        />
-      </Card>
+        <Card
+          style={{
+            borderBottomLeftRadius: "0px",
+            borderBottomRightRadius: "0px",
+            width: "50%",
+            alignItems: "center",
+          }}
+        >
+          <Form inputId="email" label="Email">
+            <Input type="text" id="email" {...register("email")} />
+          </Form>
+        </Card>
+        <Card
+          style={{
+            borderTopLeftRadius: "0px",
+            borderTopRightRadius: "0px",
+            width: "50%",
+            alignItems: "center",
+          }}
+        >
+          <SubmitButton type="submit">
+            Log In
+            <RightArrow color="#b5c401" size={32} />
+          </SubmitButton>
+        </Card>
+      </form>
     </Base>
   );
 }

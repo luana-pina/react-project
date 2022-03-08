@@ -1,15 +1,5 @@
 import { ICardGame, IGame, ICardGameCart } from ".";
 
-export interface IRootState {
-  cart: cart;
-  games: games;
-  cardGame: card;
-  login: login;
-}
-
-interface login {
-  isLogin: boolean;
-}
 interface card {
   clear: boolean;
   card: {
@@ -36,4 +26,13 @@ interface games {
     max_number: number;
     color: string;
   };
+}
+interface login {
+  isLogin: boolean;
+}
+export interface IRootState {
+  cart: cart;
+  games: games;
+  cardGame: card;
+  login: login;
 }

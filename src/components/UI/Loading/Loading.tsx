@@ -1,11 +1,11 @@
 import React from "react";
-import { Content, LoadingIcon, NotFoundText } from "./styles";
+import { Content, LoadingIcon, LoadingText } from "./styles";
 
 const Loading: React.FC<{}> = (props) => {
   return (
     <Content>
       <LoadingIcon size={25} />
-      <NotFoundText>Loading</NotFoundText>
+      <LoadingText>Loading</LoadingText>
     </Content>
   );
 };

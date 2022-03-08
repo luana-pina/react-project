@@ -9,14 +9,18 @@ const cartSlice = createSlice({
     totalAmound: 0,
   },
   reducers: {
-    getMinCartValue(state, action) {
-      const { min_cart_value } = action.payload;
-      state.min_cart_value = min_cart_value;
-    },
     addCardToCart(state, action) {
       const card: ICardGameCart = action.payload;
       state.cardGames.push(card);
       state.totalAmound += card.price;
+    },
+    clearCart(state) {
+      state.cardGames = Array<ICardGameCart>();
+      state.totalAmound = 0;
+    },
+    getMinCartValue(state, action) {
+      const { min_cart_value } = action.payload;
+      state.min_cart_value = min_cart_value;
     },
     removeCardToCart(state, action) {
       const { cardId } = action.payload;
@@ -28,10 +32,6 @@ const cartSlice = createSlice({
         }
       });
       state.cardGames = newListItems;
-    },
-    clearCart(state) {
-      state.cardGames = Array<ICardGameCart>();
-      state.totalAmound = 0;
     },
   },
 });

@@ -1,6 +1,6 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
 import { BackHome, Content, NotFoundText, PowerOffIcon } from "./styles";
+import { useNavigate } from "react-router-dom";
+import React from "react";
 
 const NotFound: React.FC = () => {
   const navigate = useNavigate();

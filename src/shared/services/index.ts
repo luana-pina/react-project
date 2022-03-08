@@ -1,5 +1,5 @@
 import auth from "./auth";
-import games from "./gamesRequest";
 import cart from "./cartRequest";
+import games from "./gamesRequest";
 
-export { auth, games, cart };
+export { auth, cart, games };

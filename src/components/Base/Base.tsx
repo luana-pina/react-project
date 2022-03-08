@@ -1,6 +1,5 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import Card from "../UI/Card/Card";
 import { LeftArrow, RightArrow } from "../UI/Arrows/Arrows";
 import { Wrapper } from "../UI/Wrapper/Wrapper";
 import {
@@ -10,15 +9,11 @@ import {
   UpperText,
   TextContent,
   PageTitle,
-  SubmitButton,
-  Forget,
   Redirect,
 } from "./style";
 
 const Base: React.FC<{
   pageTitle: string;
-  submit: { text: string; onSubmit: Function };
-  forget?: boolean;
   back?: boolean;
 }> = (props) => {
   const navigate = useNavigate();
@@ -33,20 +28,6 @@ const Base: React.FC<{
       <Content>
         <PageTitle>{props.pageTitle}</PageTitle>
         {props.children}
-        <Card
-          style={{
-            borderTopLeftRadius: "0px",
-            borderTopRightRadius: "0px",
-            width: "50%",
-            alignItems: "center",
-          }}
-        >
-          {props.forget && <Forget to="/forgot">I forget my password</Forget>}
-          <SubmitButton type="submit" onClick={props.submit.onSubmit}>
-            {props.submit.text}
-            <RightArrow color="#b5c401" size={32} />
-          </SubmitButton>
-        </Card>
         <Redirect
           reverse={props.back}
           onClick={

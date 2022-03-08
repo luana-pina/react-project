@@ -15,11 +15,6 @@ const cardGameSlice = createSlice({
       const { newNumber } = action.payload;
       state.card.choosen_numbers.push(newNumber);
     },
-    removeNumber(state, action) {
-      const { number } = action.payload;
-      const index = state.card.choosen_numbers.indexOf(number);
-      state.card.choosen_numbers.splice(index, 1);
-    },
     addCardInfo(state, action) {
       const { id, price, type } = action.payload;
       state.card.id = id;
@@ -32,6 +27,11 @@ const cardGameSlice = createSlice({
       state.card.type.id = NaN;
       state.card.type.type = "";
       state.card.choosen_numbers = [];
+    },
+    removeNumber(state, action) {
+      const { number } = action.payload;
+      const index = state.card.choosen_numbers.indexOf(number);
+      state.card.choosen_numbers.splice(index, 1);
     },
   },
 });

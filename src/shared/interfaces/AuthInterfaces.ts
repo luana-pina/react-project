@@ -7,6 +7,14 @@ export interface IBodyRegister {
   email: string;
   password: string;
 }
+export interface IChangePassword {
+  confirmPassword: string;
+  password: string;
+}
+export interface ILoginResponse {
+  user: User;
+  token: Token;
+}
 interface Token {
   type: string;
   token: string;
@@ -23,8 +31,4 @@ interface User {
   created_at: Date;
   updated_at: Date;
   picture: null;
-}
-export interface ILoginResponse {
-  user: User;
-  token: Token;
 }

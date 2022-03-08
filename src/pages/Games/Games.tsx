@@ -1,4 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { games } from "../../shared/services";
+import { IRootState } from "../../shared/interfaces";
+import { gamesActions } from "../../store/games-slice";
+import { cardGameActions } from "../../store/game-card-slice";
+import { toast } from "react-toastify";
+import ActionButtons from "../../components/ActionsButtons/ActionButtons";
+import Cart from "../../components/Cart/Cart";
+import GameTable from "../../components/GameTable/GameTable";
+import GamesButtons from "../../components/GamesButtons/GamesButtons";
+import Layout from "../../components/Layout/Layout";
 import {
   Content,
   Description,
@@ -8,32 +20,44 @@ import {
   RightContent,
   Subtitle,
 } from "./styles";
-import Layout from "../../components/Layout/Layout";
-import { useNavigate, useParams } from "react-router-dom";
-import GameTable from "../../components/GameTable/GameTable";
-import GamesButtons from "../../components/GamesButtons/GamesButtons";
-import ActionButtons from "../../components/ActionsButtons/ActionButtons";
-import Cart from "../../components/Cart/Cart";
-import { useDispatch, useSelector } from "react-redux";
-import { games } from "../../shared/services";
-import { IRootState } from "../../shared/interfaces";
-import { gamesActions } from "../../store/games-slice";
-import { cardGameActions } from "../../store/game-card-slice";
-import { toast } from "react-toastify";
 
 const Games: React.FC = () => {
+  const dispatch = useDispatch();
+  const game = useSelector((state: IRootState) => state.games.gameSelected);
+  const history = useNavigate();
+  const isLogin = localStorage.getItem("bearer");
+  const navigate = useNavigate();
   const params = useParams();
   const { gameId } = params;
-  const history = useNavigate();
-  const game = useSelector((state: IRootState) => state.games.gameSelected);
-  const dispatch = useDispatch();
+  const { getGamesTypes } = games();
   const selectedNumbers: number[] = useSelector(
     (state: IRootState) => state.cardGame.card.choosen_numbers
   );
-  const isLogin = localStorage.getItem("bearer");
-  const { getGamesTypes } = games();
-  const navigate = useNavigate();
 
+  function changeSelect(buttonId: string) {
+    if (params.gameId !== buttonId) {
+      history(`/games/${buttonId}`);
+    }
+  }
+
+  function completeGameHandler() {
+    let maxNumber = game.range;
+    let times = game.max_number;
+    const numbersArray = [...selectedNumbers];
+    let numb: number;
+    let cont = 0;
+    if (selectedNumbers.length !== 0) {
+      cont = selectedNumbers.length;
+    }
+    while (cont < times) {
+      numb = Math.floor(Math.random() * maxNumber + 1);
+      if (!numbersArray.some((item) => item === numb)) {
+        selectHandler(numb);
+        numbersArray.push(numb);
+        cont++;
+      }
+    }
+  }
   async function getGamesList(gameId: number) {
     try {
       const resGamesRequest = await getGamesTypes();
@@ -48,25 +72,6 @@ const Games: React.FC = () => {
         position: toast.POSITION.TOP_CENTER,
         draggable: false,
       });
-    }
-  }
-  useEffect(() => {
-    if (!isLogin) {
-      toast.error("Log in to access this page!", {
-        position: toast.POSITION.TOP_CENTER,
-        draggable: false,
-      });
-      navigate("/login");
-      return;
-    }
-    getGamesList(Number(gameId));
-    dispatch(cardGameActions.clearCard());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [gameId]);
-
-  function changeSelect(buttonId: string) {
-    if (params.gameId !== buttonId) {
-      history(`/games/${buttonId}`);
     }
   }
 
@@ -92,24 +97,19 @@ const Games: React.FC = () => {
     );
   }
 
-  function completeGameHandler() {
-    let maxNumber = game.range;
-    let times = game.max_number;
-    const numbersArray = [...selectedNumbers];
-    let numb: number;
-    let cont = 0;
-    if (selectedNumbers.length !== 0) {
-      cont = selectedNumbers.length;
+  useEffect(() => {
+    if (!isLogin) {
+      toast.error("Log in to access this page!", {
+        position: toast.POSITION.TOP_CENTER,
+        draggable: false,
+      });
+      navigate("/login");
+      return;
     }
-    while (cont < times) {
-      numb = Math.floor(Math.random() * maxNumber + 1);
-      if (!numbersArray.some((item) => item === numb)) {
-        selectHandler(numb);
-        numbersArray.push(numb);
-        cont++;
-      }
-    }
-  }
+    getGamesList(Number(gameId));
+    dispatch(cardGameActions.clearCard());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [gameId]);
 
   return (
     <Layout>

@@ -1,75 +1,74 @@
 import * as yup from "yup";
 import { auth } from "../../shared/services";
-import { loginActions } from "../../store/login-slice";
-import { useDispatch } from "react-redux";
-import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { Forget, SubmitButton } from "../../components/Base/style";
-import { IBodyLogin } from "../../shared/interfaces";
+import { useForm } from "react-hook-form";
+import { useNavigate, useParams } from "react-router-dom";
+import { IChangePassword } from "../../shared/interfaces/AuthInterfaces";
 import { Input } from "../../components/UI/Form/style";
+import { SubmitButton } from "../../components/Base/style";
 import { RightArrow } from "../../components/UI/Arrows/Arrows";
 import Base from "../../components/Base/Base";
 import Card from "../../components/UI/Card/Card";
 import Form from "../../components/UI/Form/Form";
 
-function Login() {
-  const { handleSubmit, register } = useForm();
-  const { login } = auth();
-  const dispatch = useDispatch();
+function ChangePassword() {
   const navigate = useNavigate();
+  const params = useParams();
+  const { changePassword } = auth();
+  const { handleSubmit, register } = useForm();
+  const { userToken } = params;
   let isValid = false;
 
-  async function handlerSubmit(inputValues: IBodyLogin) {
+  async function handlerSubmit(inputValues: IChangePassword) {
     const requestPopup = toast.loading("Loading...", {
       position: toast.POSITION.TOP_CENTER,
     });
     await isValidInputs(requestPopup, inputValues);
     if (isValid) {
-      try {
-        await login(inputValues).then((res) => {
+      await changePassword(userToken || "", {
+        password: inputValues.password,
+      })
+        .then(() => {
           toast.update(requestPopup, {
-            render: "User logged successfully",
+            render: "Change password successfully!",
             type: "success",
             isLoading: false,
             autoClose: 2000,
           });
-          localStorage.setItem(res.data.token.type, res.data.token.token);
-          dispatch(loginActions.isLoginHandler());
-          navigate("/home");
+          navigate("/login");
+        })
+        .catch(() => {
+          toast.update(requestPopup, {
+            render: "Failed to request!",
+            type: "error",
+            isLoading: false,
+            autoClose: 2000,
+          });
         });
-      } catch (error) {
-        if (`${error}`.match("401")) {
-          toast.update(requestPopup, {
-            render: "Invalid credentials",
-            type: "error",
-            isLoading: false,
-            autoClose: 2000,
-          });
-        } else {
-          toast.update(requestPopup, {
-            render: "Request to failed!",
-            type: "error",
-            isLoading: false,
-            autoClose: 2000,
-          });
-        }
-      }
     }
   }
 
-  async function isValidInputs(popup: any, inputValues: IBodyLogin) {
+  async function isValidInputs(popup: any, inputValues: IChangePassword) {
     const schema = yup.object().shape({
-      password: yup.string().required("Password is required!"),
-      email: yup
+      confirmPassword: yup
         .string()
-        .required("Email is required!")
-        .email("Please enter a valid email"),
+        .required("Confirm password field is required!"),
+      password: yup.string().required("New password field is required!"),
     });
     await schema
       .validate(inputValues)
-      .then(() => {
-        isValid = true;
+      .then((valid) => {
+        if (valid.confirmPassword === valid.password) {
+          isValid = true;
+        } else {
+          toast.update(popup, {
+            render: "Passwords do not match",
+            type: "error",
+            isLoading: false,
+            autoClose: 2000,
+          });
+          isValid = false;
+        }
       })
       .catch((err) => {
         toast.update(popup, {
@@ -83,7 +82,7 @@ function Login() {
   }
 
   return (
-    <Base pageTitle="Authentication">
+    <Base pageTitle="Reset password" back={true}>
       <form
         onSubmit={handleSubmit((data: any) => {
           handlerSubmit(data);
@@ -104,8 +103,8 @@ function Login() {
             alignItems: "center",
           }}
         >
-          <Form inputId="email" label="Email">
-            <Input type="text" id="email" {...register("email")} />
+          <Form inputId="password" label="New password">
+            <Input type="password" id="password" {...register("password")} />
           </Form>
         </Card>
         <Card
@@ -118,8 +117,12 @@ function Login() {
             alignItems: "center",
           }}
         >
-          <Form inputId="password" label="Password">
-            <Input type="password" id="password" {...register("password")} />
+          <Form inputId="confirmPassword" label="Confirm password">
+            <Input
+              type="password"
+              id="confirmPassword"
+              {...register("confirmPassword")}
+            />
           </Form>
         </Card>
         <Card
@@ -130,9 +133,8 @@ function Login() {
             alignItems: "center",
           }}
         >
-          <Forget to="/forgot">I forget my password</Forget>
           <SubmitButton type="submit">
-            Log In
+            Register
             <RightArrow color="#b5c401" size={32} />
           </SubmitButton>
         </Card>
@@ -141,4 +143,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default ChangePassword;

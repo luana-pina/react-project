@@ -22,6 +22,7 @@ export const RecentGames = styled.div`
 `;
 export const LeftContent = styled.div`
   display: flex;
+  max-width: 850px;
   width: 70%;
   flex-direction: row;
   align-items: center;
@@ -29,7 +30,7 @@ export const LeftContent = styled.div`
 `;
 
 export const PageTitle = styled.p`
-  width: fit-content;
+  width: max-content;
   font-size: 28px;
   font-style: italic;
   font-weight: bold;
