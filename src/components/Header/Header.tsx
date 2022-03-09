@@ -18,6 +18,7 @@ import {
 const Header: React.FC<{ isHome: boolean | undefined }> = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const isMobile = window.screen.availWidth < 650;
 
   function logoutHandler() {
     localStorage.removeItem("bearer");
@@ -29,22 +30,42 @@ const Header: React.FC<{ isHome: boolean | undefined }> = (props) => {
 
   return (
     <Wrapper>
-      <LeftContent>
-        <Logo>TGL</Logo>
-        {props.isHome ? (
-          <></>
-        ) : (
-          <NavIcon onClick={() => navigate("/home")}>Home</NavIcon>
-        )}
-      </LeftContent>
-      <Line />
-      <RightContent>
-        <NavIcon>Account</NavIcon>
-        <Logout onClick={logoutHandler}>
-          <NavIcon>Log out</NavIcon>
-          <RightArrow size={30} />
-        </Logout>
-      </RightContent>
+      {!isMobile && (
+        <>
+          <LeftContent>
+            <Logo>TGL</Logo>
+            {props.isHome ? (
+              <></>
+            ) : (
+              <NavIcon onClick={() => navigate("/home")}>Home</NavIcon>
+            )}
+          </LeftContent>
+          <Line />
+          <RightContent>
+            <NavIcon>Account</NavIcon>
+            <Logout onClick={logoutHandler}>
+              <NavIcon>Log out</NavIcon>
+              <RightArrow size={30} />
+            </Logout>
+          </RightContent>
+        </>
+      )}
+      {isMobile && (
+        <>
+          <Logo>TGL</Logo>
+          {props.isHome ? (
+            <></>
+          ) : (
+            <NavIcon onClick={() => navigate("/home")}>Home</NavIcon>
+          )}
+          <Line />
+          <NavIcon>Account</NavIcon>
+          <Logout onClick={logoutHandler}>
+            <NavIcon>Log out</NavIcon>
+            <RightArrow size={30} />
+          </Logout>
+        </>
+      )}
     </Wrapper>
   );
 };

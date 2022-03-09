@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { games } from "../../shared/services";
@@ -18,8 +18,13 @@ import {
   LeftContent,
   PageTitle,
   RightContent,
+  ShowCart,
   Subtitle,
 } from "./styles";
+import Card from "../../components/UI/Card/Card";
+import { LeftArrow } from "../../components/UI/Arrows/Arrows";
+import { CartIcon } from "../../components/ActionsButtons/styles";
+import { AiOutlineShoppingCart } from "react-icons/ai";
 
 const Games: React.FC = () => {
   const dispatch = useDispatch();
@@ -28,8 +33,10 @@ const Games: React.FC = () => {
   const isLogin = localStorage.getItem("bearer");
   const navigate = useNavigate();
   const params = useParams();
+  const [showCart, setShowCart] = useState<boolean>(false);
   const { gameId } = params;
   const { getGamesTypes } = games();
+  const isMobile = window.screen.availWidth < 770;
   const selectedNumbers: number[] = useSelector(
     (state: IRootState) => state.cardGame.card.choosen_numbers
   );
@@ -132,7 +139,19 @@ const Games: React.FC = () => {
           <ActionButtons completeGameHandler={completeGameHandler} />
         </LeftContent>
         <RightContent>
-          <Cart />
+          {isMobile ? (
+            <>
+              {showCart && <Cart close={setShowCart} />}
+              {!showCart && (
+                <ShowCart onClick={() => setShowCart(true)}>
+                  <AiOutlineShoppingCart color="#27c383" size={30} />
+                  <LeftArrow size={25} />
+                </ShowCart>
+              )}
+            </>
+          ) : (
+            <Cart />
+          )}
         </RightContent>
       </Content>
     </Layout>

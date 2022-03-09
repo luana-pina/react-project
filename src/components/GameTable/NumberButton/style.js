@@ -12,4 +12,11 @@ export const ButtonTable = styled.div`
   font-size: 22px;
   cursor: pointer;
   background-color: ${(props) => (props.isSelected ? props.color : "#adc0c4")};
+  @media (max-width: 1024px) {
+    width: 3.3rem;
+    height: 3.3rem;
+    line-height: 3.3rem;
+    margin: 2px;
+    font-size: 18px;
+  }
 `;

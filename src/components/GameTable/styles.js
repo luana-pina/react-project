@@ -6,4 +6,7 @@ export const Table = styled.table`
   align-items: center;
   align-self: center;
   margin-top: 3%;
+  @media (max-width: 1024px) {
+    margin-top: 0;
+  }
 `;

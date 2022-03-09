@@ -1,7 +1,7 @@
 import React from "react";
 import { Label } from "./style";
 
-const Form: React.FC<{
+const FormLabel: React.FC<{
   label: string;
   inputId: string;
 }> = (props) => {
@@ -21,4 +21,4 @@ const Form: React.FC<{
     </div>
   );
 };
-export default Form;
+export default FormLabel;

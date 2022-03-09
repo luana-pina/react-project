@@ -11,6 +11,19 @@ export const Wrapper = styled.header`
   height: 10vh;
   max-height: 75px;
   box-shadow: 0px 0px 3px 2px #ebebeb;
+  @media (max-width: 1024px) {
+    width: 90%;
+    padding-left: 5%;
+    padding-right: 5%;
+    height: 9vh;
+  }
+  @media (max-width: 500px) {
+    align-items: center;
+    width: 94%;
+    height: 8vh;
+    padding-left: 3%;
+    padding-right: 3%;
+  }
 `;
 export const Line = styled.div`
   position: absolute;
@@ -20,6 +33,18 @@ export const Line = styled.div`
   width: 7vw;
   height: 7px;
   border-radius: 6px;
+  @media (max-width: 1024px) {
+    width: 9vw;
+    left: 5vw;
+  }
+  @media (max-width: 768px) {
+    width: 13vw;
+  }
+  @media (max-width: 500px) {
+    top: 8vh;
+    left: 2vw;
+    width: 20vw;
+  }
 `;
 
 export const LeftContent = styled.div`
@@ -30,6 +55,9 @@ export const LeftContent = styled.div`
   width: 16.3vw;
   padding-left: 0.2vw;
   justify-content: space-between;
+  @media (max-width: 1024px) {
+    width: 25vw;
+  }
 `;
 
 export const RightContent = styled.div`
@@ -38,6 +66,12 @@ export const RightContent = styled.div`
   align-items: center;
   width: 17vw;
   justify-content: space-between;
+  @media (max-width: 1024px) {
+    width: 25vw;
+  }
+  @media (max-width: 768px) {
+    width: 35%;
+  }
 `;
 
 export const Logout = styled.div`
@@ -54,6 +88,9 @@ export const Logo = styled.h1`
   letter-spacing: 0px;
   color: #707070;
   margin: 0px 0px 0px 0px;
+  @media (max-width: 500px) {
+    font-size: 38px;
+  }
 `;
 
 export const NavIcon = styled.h4`
@@ -63,4 +100,10 @@ export const NavIcon = styled.h4`
   font-size: 25px;
   cursor: pointer;
   text-decoration: none;
+  @media (max-width: 1024px) {
+    font-size: 20px;
+  }
+  @media (max-width: 500px) {
+    font-size: 18px;
+  }
 `;

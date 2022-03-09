@@ -2,7 +2,13 @@ import React from "react";
 import GameCard from "../GameCard/GameCard";
 import Card from "../UI/Card/Card";
 import { RightArrow } from "../UI/Arrows/Arrows";
-import { CartItems, CartTitle, CartTotal, TextButton } from "./styles";
+import {
+  CartItems,
+  CartTitle,
+  CartTotal,
+  TextButton,
+  TopContent,
+} from "./styles";
 import { ICartGamesBody, IRootState } from "../../shared/interfaces";
 import { useDispatch, useSelector } from "react-redux";
 import { cart } from "../../shared/services";
@@ -11,12 +17,13 @@ import { cartActions } from "../../store/cart-slice";
 import NotFoundGames from "../UI/NotFoundGames/NotFoundGames";
 import { useNavigate } from "react-router-dom";
 
-const Cart: React.FC = (props) => {
+const Cart: React.FC<{ close?: Function }> = (props) => {
   const cartData = useSelector((state: IRootState) => state.cart);
   const totalCart = useSelector((state: IRootState) => state.cart.totalAmound);
   const { sendCart } = cart();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const onClose = props.close ? props.close : () => {};
 
   function convertToReal() {
     let valueString = String(totalCart);
@@ -85,7 +92,18 @@ const Cart: React.FC = (props) => {
           maxHeight: "55vh",
         }}
       >
-        <CartTitle>Cart</CartTitle>
+        <TopContent>
+          <CartTitle>Cart</CartTitle>
+          {props.close && (
+            <RightArrow
+              size={27}
+              margin={"0 1rem 0 0"}
+              onClick={() => {
+                onClose(false);
+              }}
+            />
+          )}
+        </TopContent>
         <CartItems>
           {cartData.cardGames.length === 0 ? (
             <NotFoundGames isCart={true} />

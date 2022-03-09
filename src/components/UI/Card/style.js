@@ -25,5 +25,12 @@ export const Content = styled.div`
   height: ${(props) => (props.style.height ? props.style.height : "auto")};
   max-height: ${(props) =>
     props.style.maxHeight ? props.style.maxHeight : "100%"};
+  max-width: ${(props) =>
+    props.style.maxWidht ? props.style.maxWidht : "100%"};
   width: ${(props) => (props.style.width ? props.style.width : "100%")};
+
+  @media (max-width: 1024px) {
+    width: 100% !important;
+    max-height: 65% !important;
+  }
 `;

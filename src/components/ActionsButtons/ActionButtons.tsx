@@ -34,7 +34,7 @@ const ActionButtons: React.FC<{
 
   return (
     <Content>
-      <div>
+      <div style={{ display: "flex", alignItems: "center" }}>
         <ActionsGame onClick={props.completeGameHandler}>
           Complete Game
         </ActionsGame>

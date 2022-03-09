@@ -4,12 +4,12 @@ import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { IChangePassword } from "../../shared/interfaces/AuthInterfaces";
-import { Input } from "../../components/UI/Form/style";
-import { SubmitButton } from "../../components/Base/style";
+import { Input } from "../../components/UI/FormLabel/style";
+import { Form, SubmitButton } from "../../components/Base/style";
 import { RightArrow } from "../../components/UI/Arrows/Arrows";
 import Base from "../../components/Base/Base";
 import Card from "../../components/UI/Card/Card";
-import Form from "../../components/UI/Form/Form";
+import FormLabel from "../../components/UI/FormLabel/FormLabel";
 
 function ChangePassword() {
   const navigate = useNavigate();
@@ -83,7 +83,7 @@ function ChangePassword() {
 
   return (
     <Base pageTitle="Reset password" back={true}>
-      <form
+      <Form
         onSubmit={handleSubmit((data: any) => {
           handlerSubmit(data);
         })}
@@ -103,9 +103,9 @@ function ChangePassword() {
             alignItems: "center",
           }}
         >
-          <Form inputId="password" label="New password">
+          <FormLabel inputId="password" label="New password">
             <Input type="password" id="password" {...register("password")} />
-          </Form>
+          </FormLabel>
         </Card>
         <Card
           style={{
@@ -117,13 +117,13 @@ function ChangePassword() {
             alignItems: "center",
           }}
         >
-          <Form inputId="confirmPassword" label="Confirm password">
+          <FormLabel inputId="confirmPassword" label="Confirm password">
             <Input
               type="password"
               id="confirmPassword"
               {...register("confirmPassword")}
             />
-          </Form>
+          </FormLabel>
         </Card>
         <Card
           style={{
@@ -138,7 +138,7 @@ function ChangePassword() {
             <RightArrow color="#b5c401" size={32} />
           </SubmitButton>
         </Card>
-      </form>
+      </Form>
     </Base>
   );
 }

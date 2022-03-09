@@ -6,6 +6,7 @@ export const Content = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   padding-top: 3vw;
 `;
 
@@ -24,6 +25,13 @@ export const ActionsGame = styled.button`
     position: relative;
     top: 3px;
     box-shadow: none;
+  }
+  @media (max-width: 1024px) {
+    width: 10rem;
+  }
+  @media (max-width: 670px) {
+    width: 7rem;
+    margin-right: 1vw;
   }
 `;
 
@@ -47,6 +55,12 @@ export const AddCart = styled.button`
     position: relative;
     top: 3px;
     box-shadow: none;
+  }
+  @media (max-width: 1024px) {
+    width: 12rem;
+  }
+  @media (max-width: 670px) {
+    width: 10rem;
   }
 `;
 export const CartIcon = styled(AiOutlineShoppingCart)`

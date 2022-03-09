@@ -10,6 +10,12 @@ export const BottomText = styled.p`
   text-transform: uppercase;
   margin: 0;
   color: #707070;
+  @media (max-width: 1024px) {
+    font-size: 65px;
+  }
+  @media (max-width: 768px) {
+    font-size: 45px;
+  }
 `;
 export const PageTitle = styled.p`
   width: max-content;
@@ -18,6 +24,14 @@ export const PageTitle = styled.p`
   font-weight: bold;
   margin: 0 0 1.2rem 0;
   color: #707070;
+  @media (max-width: 1024px) {
+    font-size: 30px;
+    margin: 0 0 0.2rem 0;
+  }
+  @media (max-width: 768px) {
+    font-size: 25px;
+    margin: 0;
+  }
 `;
 export const DecoratedText = styled.div`
   font-size: 22px;
@@ -31,6 +45,18 @@ export const DecoratedText = styled.div`
   line-height: 3rem;
   color: #ffffff;
   margin: 0;
+  @media (max-width: 1024px) {
+    font-size: 18px;
+    width: 7rem;
+    height: 2rem;
+    line-height: 2rem;
+  }
+  @media (max-width: 768px) {
+    font-size: 15px;
+    width: 5rem;
+    height: 1.7rem;
+    line-height: 1.7rem;
+  }
 `;
 export const TextContent = styled.div`
   display: flex;
@@ -41,6 +67,13 @@ export const TextContent = styled.div`
   padding: 2% 0;
   max-height: 550px;
   height: 70%;
+  @media (max-width: 1024px) {
+    max-height: 400px;
+  }
+  @media (max-width: 768px) {
+    max-height: 300px;
+    padding: 1% 0;
+  }
 `;
 export const Content = styled.div`
   display: flex;
@@ -58,6 +91,12 @@ export const UpperText = styled.p`
   font-weight: bold;
   margin: 0;
   color: #707070;
+  @media (max-width: 1024px) {
+    font-size: 55px;
+  }
+  @media (max-width: 768px) {
+    font-size: 45px;
+  }
 `;
 export const Forget = styled(Link)`
   text-align: right;
@@ -68,6 +107,9 @@ export const Forget = styled(Link)`
   margin-top: 5%;
   color: #c1c1c1;
   text-decoration: none;
+  @media (max-width: 768px) {
+    font-size: 13px;
+  }
 `;
 export const SubmitButton = styled.button`
   display: flex;
@@ -86,6 +128,9 @@ export const SubmitButton = styled.button`
     top: 3px;
     box-shadow: none;
   }
+  @media (max-width: 768px) {
+    margin: 1.5rem;
+  }
 `;
 export const Redirect = styled.p`
   display: flex;
@@ -102,5 +147,27 @@ export const Redirect = styled.p`
     position: relative;
     top: 3px;
     box-shadow: none;
+  }
+  @media (max-width: 1024px) {
+    font-size: 30px;
+    margin: 1rem 0;
+  }
+  @media (max-width: 768px) {
+    font-size: 30px;
+    margin: 0;
+  }
+`;
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 700px;
+  margin: 1.2rem 0;
+  align-items: center;
+  @media (max-width: 1024px) {
+    max-width: 300px;
+  }
+  @media (max-width: 768px) {
+    max-width: 250px;
   }
 `;

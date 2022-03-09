@@ -5,13 +5,13 @@ import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { Forget, SubmitButton } from "../../components/Base/style";
+import { Forget, Form, SubmitButton } from "../../components/Base/style";
 import { IBodyLogin } from "../../shared/interfaces";
-import { Input } from "../../components/UI/Form/style";
+import { Input } from "../../components/UI/FormLabel/style";
 import { RightArrow } from "../../components/UI/Arrows/Arrows";
 import Base from "../../components/Base/Base";
 import Card from "../../components/UI/Card/Card";
-import Form from "../../components/UI/Form/Form";
+import FormLabel from "../../components/UI/FormLabel/FormLabel";
 
 function Login() {
   const { handleSubmit, register } = useForm();
@@ -84,17 +84,10 @@ function Login() {
 
   return (
     <Base pageTitle="Authentication">
-      <form
+      <Form
         onSubmit={handleSubmit((data: any) => {
           handlerSubmit(data);
         })}
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          width: "100%",
-          margin: "1.2rem 0",
-          alignItems: "center",
-        }}
       >
         <Card
           style={{
@@ -104,9 +97,9 @@ function Login() {
             alignItems: "center",
           }}
         >
-          <Form inputId="email" label="Email">
+          <FormLabel inputId="email" label="Email">
             <Input type="text" id="email" {...register("email")} />
-          </Form>
+          </FormLabel>
         </Card>
         <Card
           style={{
@@ -118,9 +111,9 @@ function Login() {
             alignItems: "center",
           }}
         >
-          <Form inputId="password" label="Password">
+          <FormLabel inputId="password" label="Password">
             <Input type="password" id="password" {...register("password")} />
-          </Form>
+          </FormLabel>
         </Card>
         <Card
           style={{
@@ -136,7 +129,7 @@ function Login() {
             <RightArrow color="#b5c401" size={32} />
           </SubmitButton>
         </Card>
-      </form>
+      </Form>
     </Base>
   );
 }

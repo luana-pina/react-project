@@ -3,12 +3,12 @@ import { auth } from "../../shared/services";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { Input } from "../../components/UI/Form/style";
+import { Input } from "../../components/UI/FormLabel/style";
 import { RightArrow } from "../../components/UI/Arrows/Arrows";
-import { SubmitButton } from "../../components/Base/style";
+import { Form, SubmitButton } from "../../components/Base/style";
 import Base from "../../components/Base/Base";
 import Card from "../../components/UI/Card/Card";
-import Form from "../../components/UI/Form/Form";
+import FormLabel from "../../components/UI/FormLabel/FormLabel";
 
 function ResetPassword() {
   const { handleSubmit, register } = useForm();
@@ -75,7 +75,7 @@ function ResetPassword() {
 
   return (
     <Base pageTitle="Reset password" back={true}>
-      <form
+      <Form
         onSubmit={handleSubmit((data: any) => {
           handlerSubmit(data);
         })}
@@ -95,9 +95,9 @@ function ResetPassword() {
             alignItems: "center",
           }}
         >
-          <Form inputId="email" label="Email">
+          <FormLabel inputId="email" label="Email">
             <Input type="text" id="email" {...register("email")} />
-          </Form>
+          </FormLabel>
         </Card>
         <Card
           style={{
@@ -112,7 +112,7 @@ function ResetPassword() {
             <RightArrow color="#b5c401" size={32} />
           </SubmitButton>
         </Card>
-      </form>
+      </Form>
     </Base>
   );
 }

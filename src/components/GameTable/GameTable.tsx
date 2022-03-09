@@ -8,25 +8,47 @@ const GameTable: React.FC<{
   selectHandler: Function;
 }> = (props) => {
   const rowNumber: number = Math.trunc(props.range / 10);
+  const rowNumberMobile: number = Math.trunc(props.range / 6);
   const Lines = [];
+  const isMobile = window.screen.availWidth < 650;
   let buttonsNumber: number = props.range;
 
-  for (let i = 0; i <= rowNumber; i++) {
-    const itemsLine = [];
-    let count: number = 0;
-    while (count < 10 && buttonsNumber > 0) {
-      itemsLine.push(
-        <NumberButton
-          key={count}
-          value={props.range - buttonsNumber + 1}
-          color={props.color}
-          selectHandler={props.selectHandler}
-        />
-      );
-      count++;
-      buttonsNumber--;
+  if (isMobile) {
+    for (let i = 0; i <= rowNumberMobile; i++) {
+      const itemsLine = [];
+      let count: number = 0;
+      while (count < 6 && buttonsNumber > 0) {
+        itemsLine.push(
+          <NumberButton
+            key={count}
+            value={props.range - buttonsNumber + 1}
+            color={props.color}
+            selectHandler={props.selectHandler}
+          />
+        );
+        count++;
+        buttonsNumber--;
+      }
+      Lines.push(<tr key={i}>{itemsLine}</tr>);
     }
-    Lines.push(<tr key={i}>{itemsLine}</tr>);
+  } else {
+    for (let i = 0; i <= rowNumber; i++) {
+      const itemsLine = [];
+      let count: number = 0;
+      while (count < 10 && buttonsNumber > 0) {
+        itemsLine.push(
+          <NumberButton
+            key={count}
+            value={props.range - buttonsNumber + 1}
+            color={props.color}
+            selectHandler={props.selectHandler}
+          />
+        );
+        count++;
+        buttonsNumber--;
+      }
+      Lines.push(<tr key={i}>{itemsLine}</tr>);
+    }
   }
 
   return (

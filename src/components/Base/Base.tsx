@@ -17,9 +17,10 @@ const Base: React.FC<{
   back?: boolean;
 }> = (props) => {
   const navigate = useNavigate();
+  const isMobile = window.screen.availWidth < 768;
 
   return (
-    <Wrapper direction="row">
+    <Wrapper direction={isMobile ? "column" : "row"}>
       <TextContent>
         <UpperText>The Greatest App</UpperText>
         <DecoratedText>for</DecoratedText>
