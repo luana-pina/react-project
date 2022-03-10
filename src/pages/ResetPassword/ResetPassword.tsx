@@ -108,7 +108,7 @@ function ResetPassword() {
           }}
         >
           <SubmitButton type="submit">
-            Log In
+            Send Link
             <RightArrow color="#b5c401" size={32} />
           </SubmitButton>
         </Card>

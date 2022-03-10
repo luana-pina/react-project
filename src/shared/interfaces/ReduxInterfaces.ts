@@ -30,9 +30,16 @@ interface games {
 interface login {
   isLogin: boolean;
 }
+interface ui {
+  isMobileHome: boolean;
+  isMobileBase: boolean;
+  isMobileGames: boolean;
+  isMobileHeader: boolean;
+}
 export interface IRootState {
   cart: cart;
   games: games;
   cardGame: card;
   login: login;
+  ui: ui;
 }

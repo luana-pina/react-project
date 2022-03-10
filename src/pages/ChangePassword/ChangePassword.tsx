@@ -134,7 +134,7 @@ function ChangePassword() {
           }}
         >
           <SubmitButton type="submit">
-            Register
+            Change
             <RightArrow color="#b5c401" size={32} />
           </SubmitButton>
         </Card>

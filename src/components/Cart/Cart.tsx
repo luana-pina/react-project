@@ -6,6 +6,7 @@ import {
   CartItems,
   CartTitle,
   CartTotal,
+  Content,
   TextButton,
   TopContent,
 } from "./styles";
@@ -83,7 +84,7 @@ const Cart: React.FC<{ close?: Function }> = (props) => {
   }
 
   return (
-    <>
+    <Content>
       <Card
         style={{
           borderBottomLeftRadius: "0px",
@@ -126,13 +127,14 @@ const Cart: React.FC<{ close?: Function }> = (props) => {
           alignItems: "center",
           width: "70%",
           height: "15vh",
+          maxHeight: "200px",
         }}
       >
         <TextButton onClick={saveCartHandler}>
           Save <RightArrow color="#27C383" size={35} />
         </TextButton>
       </Card>
-    </>
+    </Content>
   );
 };
 export default Cart;

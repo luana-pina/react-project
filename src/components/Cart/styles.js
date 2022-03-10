@@ -8,7 +8,20 @@ export const CartTitle = styled.h3`
   color: #707070;
   letter-spacing: 0px;
   margin-left: 8px;
+  @media (min-width: 1900px) {
+    font-size: 28px;
+  }
 `;
+export const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: end;
+  @media (max-width: 800px) {
+    align-items: center;
+  }
+`;
+
 export const CartTotal = styled.p`
   display: flex;
   flex-direction: row;
@@ -20,6 +33,9 @@ export const CartTotal = styled.p`
   letter-spacing: 0px;
   margin-top: 3vw;
   margin-left: 8px;
+  @media (min-width: 1900px) {
+    font-size: 28px;
+  }
   @media (max-width: 1024px) {
     font-size: 20px;
     margin-bottom: 0px;

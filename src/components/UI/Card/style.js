@@ -28,9 +28,16 @@ export const Content = styled.div`
   max-width: ${(props) =>
     props.style.maxWidht ? props.style.maxWidht : "100%"};
   width: ${(props) => (props.style.width ? props.style.width : "100%")};
+  min-width: 200px;
 
+  /* @media (min-width: 1770px) {
+    max-width: 340px;
+  }
   @media (max-width: 1024px) {
     width: 100% !important;
     max-height: 65% !important;
   }
+  @media (max-width: 1324px) {
+    max-height: 70% !important;
+  } */
 `;

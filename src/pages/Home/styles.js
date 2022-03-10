@@ -2,23 +2,31 @@ import { Link } from "react-router-dom";
 import styled from "styled-components/macro";
 
 export const TopContent = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  grid-template-areas: "title filters newbet";
   width: 100%;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  @media (max-width: 670px) {
-    margin-top: 2rem;
+
+  @media (max-width: 800px) {
+    justify-items: start;
+    align-items: baseline;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "title newbet"
+      "filters filters";
+    margin-top: 10vw;
   }
 `;
 export const Filters = styled.div`
+  grid-area: filters;
+  width: 100%;
   display: flex;
-  width: fit-content;
   flex-direction: row;
   align-items: center;
-  @media (max-width: 670px) {
+  @media (max-width: 880px) {
     flex-direction: column;
     align-items: flex-start;
+    width: 100%;
   }
 `;
 export const RecentGames = styled.div`
@@ -26,7 +34,7 @@ export const RecentGames = styled.div`
   width: 100%;
   flex-direction: column;
   align-items: stretch;
-  @media (max-width: 768px) {
+  @media (max-width: 955px) {
     padding-top: 2rem;
   }
 `;
@@ -37,10 +45,19 @@ export const LeftContent = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  @media (max-width: 1024px) {
-    width: 83%;
+  @media (max-width: 1435px) {
+    width: 75%;
   }
-  @media (max-width: 768px) {
+  @media (max-width: 1231px) {
+    width: 80%;
+  }
+  @media (max-width: 1180px) {
+    width: 77%;
+  }
+  @media (max-width: 1060px) {
+    width: 80%;
+  }
+  @media (max-width: 955px) {
     flex-direction: column;
     align-items: flex-start;
     justify-content: left;
@@ -49,6 +66,7 @@ export const LeftContent = styled.div`
 `;
 
 export const PageTitle = styled.p`
+  grid-area: title;
   width: max-content;
   font-size: 28px;
   font-style: italic;
@@ -56,14 +74,14 @@ export const PageTitle = styled.p`
   text-transform: uppercase;
   color: #707070;
   letter-spacing: 0px;
-  @media (max-width: 1024px) {
+  @media (max-width: 1180px) {
     font-size: 23px;
   }
-  @media (max-width: 768px) {
-    margin: 2rem 0 0 0;
-  }
-  @media (max-width: 670px) {
+  @media (max-width: 800px) {
     margin: 0;
+  }
+  @media (max-width: 375px) {
+    font-size: 20px;
   }
 `;
 export const Label = styled.p`
@@ -74,15 +92,17 @@ export const Label = styled.p`
   color: #868686;
   letter-spacing: 0px;
   margin-right: 2%;
-  @media (max-width: 1024px) {
+  @media (max-width: 1060px) {
     font-size: 16px;
   }
-  @media (max-width: 425px) {
-    margin: 1rem 0 0.5rem 0.5rem;
+  @media (max-width: 375px) {
+    font-size: 14px;
   }
 `;
 
 export const NewBet = styled(Link)`
+  grid-area: newbet;
+  justify-self: end;
   display: flex;
   width: fit-content;
   font-size: 28px;
@@ -91,8 +111,9 @@ export const NewBet = styled(Link)`
   color: #b5c401;
   letter-spacing: 0px;
   text-decoration: none;
+  align-items: center;
   justify-content: center;
-  @media (max-width: 1024px) {
+  @media (max-width: 1030px) {
     font-size: 23px;
   }
   @media (max-width: 400px) {

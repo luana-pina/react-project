@@ -3,7 +3,6 @@ import styled from "styled-components/macro";
 export const ButtonTable = styled.div`
   width: 70px;
   height: 70px;
-  margin: 3px;
   text-align: center;
   border-radius: 50%;
   line-height: 70px;
@@ -12,11 +11,34 @@ export const ButtonTable = styled.div`
   font-size: 22px;
   cursor: pointer;
   background-color: ${(props) => (props.isSelected ? props.color : "#adc0c4")};
-  @media (max-width: 1024px) {
+  @media (max-width: 1500px) {
+    width: 4rem;
+    height: 4rem;
+    line-height: 4rem;
+    font-size: 20px;
+  }
+  @media (max-width: 1280px) {
+    width: 3.5rem;
+    height: 3.5rem;
+    line-height: 3.5rem;
+    font-size: 18px;
+  }
+
+  @media (max-width: 1200px) {
     width: 3.3rem;
     height: 3.3rem;
     line-height: 3.3rem;
-    margin: 2px;
     font-size: 18px;
+  }
+  @media (max-width: 360px) {
+    width: 3rem;
+    height: 3rem;
+    line-height: 3rem;
+    font-size: 15px;
+  }
+  @media (max-width: 320px) {
+    width: 2.8rem;
+    height: 2.8rem;
+    line-height: 2.8rem;
   }
 `;

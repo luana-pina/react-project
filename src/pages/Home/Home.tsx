@@ -30,7 +30,6 @@ function Home() {
   const gameId: string | undefined = params["*"];
   const gamesList = useSelector((state: IRootState) => state.games.gamesType);
   const isLogin = localStorage.getItem("bearer");
-  const isMobile = window.screen.availWidth < 650;
   const navigate = useNavigate();
   const recentGames = useSelector(
     (state: IRootState) => state.games.recentGames
@@ -95,37 +94,18 @@ function Home() {
 
   return (
     <Layout isHome={true}>
-      {isMobile ? (
-        <>
-          <TopContent>
-            <PageTitle>Recent Games</PageTitle>
-            {gamesList.length > 0 && (
-              <NewBet to={`/games/${gamesList[0].id}`}>
-                New Bet <RightArrow color="#B5C401" size={30} />
-              </NewBet>
-            )}
-          </TopContent>
-          <Filters>
-            <Label>Filters</Label>
-            <GamesButtons width="6.5rem" height="1.9rem" to={changeSelect} />
-          </Filters>
-        </>
-      ) : (
-        <TopContent>
-          <LeftContent>
-            <PageTitle>Recent Games</PageTitle>
-            <Filters>
-              <Label>Filters</Label>
-              <GamesButtons width="6.5rem" height="1.9rem" to={changeSelect} />
-            </Filters>
-          </LeftContent>
-          {gamesList.length > 0 && (
-            <NewBet to={`/games/${gamesList[0].id}`}>
-              New Bet <RightArrow color="#B5C401" size={30} />
-            </NewBet>
-          )}
-        </TopContent>
-      )}
+      <TopContent>
+        <PageTitle>Recent Games</PageTitle>
+        <Filters>
+          <Label>Filters</Label>
+          <GamesButtons width="6.5rem" height="1.9rem" to={changeSelect} />
+        </Filters>
+        {gamesList.length > 0 && (
+          <NewBet to={`/games/${gamesList[0].id}`}>
+            New Bet <RightArrow color="#B5C401" size={30} />
+          </NewBet>
+        )}
+      </TopContent>
       {loading && <Loading />}
       {!loading && (
         <RecentGames>

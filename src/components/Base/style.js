@@ -10,6 +10,9 @@ export const BottomText = styled.p`
   text-transform: uppercase;
   margin: 0;
   color: #707070;
+  @media (max-width: 1324px) {
+    font-size: 75px;
+  }
   @media (max-width: 1024px) {
     font-size: 65px;
   }
@@ -45,6 +48,11 @@ export const DecoratedText = styled.div`
   line-height: 3rem;
   color: #ffffff;
   margin: 0;
+
+  @media (max-width: 1324px) {
+    height: 2.5rem;
+    line-height: 2.5rem;
+  }
   @media (max-width: 1024px) {
     font-size: 18px;
     width: 7rem;
@@ -67,12 +75,22 @@ export const TextContent = styled.div`
   padding: 2% 0;
   max-height: 550px;
   height: 70%;
+  @media (min-width: 1900px) {
+    max-width: 900px;
+  }
+  @media (max-width: 1324px) {
+    height: 75%;
+  }
   @media (max-width: 1024px) {
     max-height: 400px;
   }
   @media (max-width: 768px) {
     max-height: 300px;
     padding: 1% 0;
+  }
+  @media (max-width: 650px) {
+    width: 30%;
+    padding-top: 10%;
   }
 `;
 export const Content = styled.div`
@@ -82,6 +100,13 @@ export const Content = styled.div`
   align-items: center;
   width: 40%;
   height: 100vh;
+
+  @media (min-width: 1900px) {
+    max-width: 900px;
+  }
+  @media (max-width: 650px) {
+    height: 50vh;
+  }
 `;
 export const UpperText = styled.p`
   text-align: center;
@@ -91,6 +116,9 @@ export const UpperText = styled.p`
   font-weight: bold;
   margin: 0;
   color: #707070;
+  @media (max-width: 1324px) {
+    font-size: 65px;
+  }
   @media (max-width: 1024px) {
     font-size: 55px;
   }
@@ -131,6 +159,9 @@ export const SubmitButton = styled.button`
   @media (max-width: 768px) {
     margin: 1.5rem;
   }
+  @media (max-width: 650px) {
+    font-size: 27px;
+  }
 `;
 export const Redirect = styled.p`
   display: flex;
@@ -156,6 +187,9 @@ export const Redirect = styled.p`
     font-size: 30px;
     margin: 0;
   }
+  @media (max-width: 650px) {
+    font-size: 27px;
+  }
 `;
 export const Form = styled.form`
   display: flex;
@@ -169,5 +203,8 @@ export const Form = styled.form`
   }
   @media (max-width: 768px) {
     max-width: 250px;
+  }
+  @media (max-width: 650px) {
+    margin: 0.5rem 0;
   }
 `;

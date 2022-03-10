@@ -6,19 +6,22 @@ export const Content = styled.div`
   width: 100%;
   margin: 0px;
   justify-content: space-between;
-  @media (max-width: 768px) {
+  @media (max-width: 1020px) {
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding-bottom: 1rem;
+  }
+  @media (max-width: 800px) {
+    margin-top: 8vw;
   }
 `;
 export const LeftContent = styled.div`
   display: flex;
   flex-direction: column;
   width: 64%;
-  @media (max-width: 768px) {
-    width: 90%;
+  @media (max-width: 1020px) {
+    width: 80%;
     justify-content: center;
   }
   @media (max-width: 425px) {
@@ -26,42 +29,23 @@ export const LeftContent = styled.div`
     justify-content: center;
   }
 `;
-export const ShowCart = styled.div`
-  display: flex;
-  flex-direction: row-reverse;
-  align-items: center;
-  width: fit-content;
-  height: 5%;
-  background-color: #ffffff;
-  padding: 0.5rem;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-  box-shadow: 0px 3px 25px #00000014;
-`;
 export const RightContent = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  width: 36%;
+  align-items: center;
+  width: 40%;
+  @media (min-width: 1900px) {
+    width: 50%;
+  }
   @media (max-width: 1024px) {
-    width: 30%;
+    width: 40%;
     justify-content: left;
   }
-  @media (max-width: 768px) {
-    position: fixed;
-    top: 20%;
-    right: 0;
-    width: 35%;
-    justify-content: left;
-  }
-  @media (max-width: 735px) {
-    top: 20%;
-    width: 60%;
-    max-width: 300px;
-  }
-  @media (max-width: 400px) {
-    top: 15%;
-    width: 60%;
+  @media (max-width: 1020px) {
+    margin-top: 10vh;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
   }
 `;
 export const PageTitle = styled.h3`
@@ -71,7 +55,10 @@ export const PageTitle = styled.h3`
   text-transform: uppercase;
   color: #707070;
   letter-spacing: 0px;
-  @media (max-width: 400px) {
+  @media (min-width: 1900px) {
+    font-size: 30px;
+  }
+  @media (max-width: 420px) {
     font-size: 20px;
   }
 `;
@@ -80,7 +67,10 @@ export const Subtitle = styled.p`
   font-size: 20px;
   color: #868686;
   font-weight: 600;
-  @media (max-width: 400px) {
+  @media (min-width: 1900px) {
+    font-size: 25px;
+  }
+  @media (max-width: 420px) {
     margin-top: 0;
     font-size: 18px;
   }
@@ -91,7 +81,11 @@ export const DescriptionTitle = styled.p`
   font-weight: 600;
   font-style: italic;
   margin-bottom: 0px;
-  @media (max-width: 400px) {
+
+  @media (min-width: 1900px) {
+    font-size: 25px;
+  }
+  @media (max-width: 420px) {
     font-size: 18px;
   }
 `;
@@ -100,11 +94,14 @@ export const Description = styled.p`
   color: #868686;
   font-style: italic;
   margin-top: 2px;
-  @media (max-width: 1024px) {
+  @media (min-width: 1900px) {
+    font-size: 22px;
+  }
+  @media (max-width: 1050px) {
     font-size: 18px;
     margin-top: 8px;
   }
-  @media (max-width: 400px) {
+  @media (max-width: 420px) {
     font-size: 15px;
   }
 `;

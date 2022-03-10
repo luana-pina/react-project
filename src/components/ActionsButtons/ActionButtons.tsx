@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { ICardGameCart, IRootState } from "../../shared/interfaces";
 import { cartActions } from "../../store/cart-slice";
 import { cardGameActions } from "../../store/game-card-slice";
-import { ActionsGame, AddCart, CartIcon, Content } from "./styles";
+import { AddCart, CartIcon, ClearGame, CompleteGame, Content } from "./styles";
 
 const ActionButtons: React.FC<{
   completeGameHandler: Function;
@@ -34,18 +34,16 @@ const ActionButtons: React.FC<{
 
   return (
     <Content>
-      <div style={{ display: "flex", alignItems: "center" }}>
-        <ActionsGame onClick={props.completeGameHandler}>
-          Complete Game
-        </ActionsGame>
-        <ActionsGame
-          onClick={() => {
-            dispatch(cardGameActions.clearCard());
-          }}
-        >
-          Clear Game
-        </ActionsGame>
-      </div>
+      <CompleteGame onClick={props.completeGameHandler}>
+        Complete Game
+      </CompleteGame>
+      <ClearGame
+        onClick={() => {
+          dispatch(cardGameActions.clearCard());
+        }}
+      >
+        Clear Game
+      </ClearGame>
       <AddCart onClick={() => addToCartHandler(card)}>
         <CartIcon size={25} />
         Add to Cart

@@ -30,6 +30,10 @@ export const ModalContent = styled.div`
   z-index: 30;
   animation: slide-down 300ms ease-out forwards;
 
+  @media (min-width: 768px) {
+    left: calc(50% - 15%);
+    top: calc(50% - 10%);
+  }
   @media (max-width: 768px) {
     width: 20rem;
     height: 10rem;
