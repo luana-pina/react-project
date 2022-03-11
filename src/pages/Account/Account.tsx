@@ -2,7 +2,13 @@ import React, { useEffect, useState } from "react";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { FormLabel, GameCard, Input, Layout } from "../../components";
+import {
+  FormLabel,
+  GameCard,
+  Input,
+  Layout,
+  NotFoundGames,
+} from "../../components";
 import { IAccountResponse } from "../../shared/interfaces/UserInterfaces";
 import user from "../../shared/services/user";
 import { stringToArray } from "../../shared/utils/stringToArray";
@@ -118,6 +124,8 @@ const Account: React.FC = () => {
     getUserAccount();
   }, [isDisabled]);
 
+  const games = userAccount?.bets || [];
+
   return (
     <Layout>
       <PageContent>
@@ -181,7 +189,7 @@ const Account: React.FC = () => {
         )}
         <GamesAreaTitle>Yours games:</GamesAreaTitle>
         <GamesArea>
-          {!loading &&
+          {!loading && games.length > 0 ? (
             userAccount?.bets.map((item) => {
               const { id, choosen_numbers, price, game_id } = item;
               return (
@@ -195,7 +203,10 @@ const Account: React.FC = () => {
                   }}
                 />
               );
-            })}
+            })
+          ) : (
+            <NotFoundGames />
+          )}
         </GamesArea>
         {!isDisabled && (
           <AreaButtons>
