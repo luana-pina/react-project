@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { IGame, ICardGame } from "../shared/interfaces";
+import { stringToArray } from "../shared/utils/stringToArray";
 
 const gamesSlice = createSlice({
   name: "games",
@@ -37,12 +38,10 @@ const gamesSlice = createSlice({
           created_at: Date;
           type: { id: number; type: string };
         }) => {
-          const numbersArray: number[] = [];
-          const stringsArray = item.choosen_numbers.split(",");
-          stringsArray.forEach((item) => {
-            numbersArray.push(Number(item));
+          state.recentGames.push({
+            ...item,
+            choosen_numbers: stringToArray(item.choosen_numbers),
           });
-          state.recentGames.push({ ...item, choosen_numbers: numbersArray });
         }
       );
     },
