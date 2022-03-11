@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import * as yup from "yup";
+import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { FormLabel, GameCard, Input, Layout } from "../../components";
 import { IAccountResponse } from "../../shared/interfaces/UserInterfaces";
@@ -19,16 +21,89 @@ import {
 
 const Account: React.FC = () => {
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
+  const [isChanged, setIsChanged] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
   const [userAccount, setUserAccount] = useState<IAccountResponse>();
-  const { getAccount } = user();
+  const { getAccount, updateUser } = user();
+  const { handleSubmit, register, reset } = useForm();
+  let isValid = false;
+
+  async function onSave(inputValues: { email: string; name: string }) {
+    const requestPopup = toast.loading("Saving...", {
+      position: toast.POSITION.TOP_CENTER,
+    });
+    await isValidInputs(requestPopup, inputValues);
+    if (isValid) {
+      let bodyRequest = {};
+      if (inputValues.email) {
+        bodyRequest = { ...bodyRequest, email: inputValues.email };
+      }
+      if (inputValues.name) {
+        bodyRequest = { ...bodyRequest, name: inputValues.name };
+      }
+      try {
+        await updateUser(bodyRequest).then(() => {
+          setIsDisabled(true);
+          setIsChanged(false);
+          toast.update(requestPopup, {
+            render: "User updated successfully",
+            type: "success",
+            isLoading: false,
+            autoClose: 2000,
+          });
+        });
+      } catch (error) {
+        if (`${error}`.match("400")) {
+          toast.update(requestPopup, {
+            render: "Email already exists",
+            type: "error",
+            isLoading: false,
+            autoClose: 2000,
+          });
+        } else {
+          toast.update(requestPopup, {
+            render: "Request to failed!",
+            type: "error",
+            isLoading: false,
+            autoClose: 2000,
+          });
+        }
+      }
+    }
+  }
+
+  async function isValidInputs(
+    popup: any,
+    inputValues: { name: string; email: string }
+  ) {
+    const schema = yup.object().shape({
+      email: yup.string().email("Please enter a valid email"),
+      name: yup
+        .string()
+        .min(3, "Please enter a valid name! (3 or more letters)"),
+    });
+    await schema
+      .validate(inputValues)
+      .then(() => {
+        isValid = true;
+      })
+      .catch((err) => {
+        toast.update(popup, {
+          render: err.message,
+          type: "error",
+          isLoading: false,
+          autoClose: 2000,
+        });
+        isValid = false;
+      });
+  }
 
   useEffect(() => {
     async function getUserAccount() {
       await getAccount()
         .then(({ data }) => {
-          console.log(data);
           setUserAccount(data);
+          reset({ email: data.email, name: data.name });
         })
         .catch((error) => {
           toast.error("Request to failed!", {
@@ -41,7 +116,7 @@ const Account: React.FC = () => {
         });
     }
     getUserAccount();
-  }, []);
+  }, [isDisabled]);
 
   return (
     <Layout>
@@ -63,9 +138,13 @@ const Account: React.FC = () => {
                 height: "1.3rem",
                 marginLeft: "3rem",
               }}
+              {...register("name")}
               isBlocked={isDisabled}
               disabled={isDisabled ? true : false}
               defaultValue={userAccount?.name}
+              onChange={() => {
+                setIsChanged(true);
+              }}
             />
           </FormLabel>
         </NameArea>
@@ -83,9 +162,13 @@ const Account: React.FC = () => {
                 height: "1.3rem",
                 marginLeft: "3rem",
               }}
+              {...register("email")}
               isBlocked={isDisabled}
               disabled={isDisabled ? true : false}
               defaultValue={userAccount?.email}
+              onChange={() => {
+                setIsChanged(true);
+              }}
             />
           </FormLabel>
         </EmailArea>
@@ -117,14 +200,17 @@ const Account: React.FC = () => {
         {!isDisabled && (
           <AreaButtons>
             <SaveButton
-              onClick={() => {
-                setIsDisabled(true);
-              }}
+              onClick={handleSubmit((data: any) => {
+                onSave(data);
+              })}
+              isBlocked={!isChanged}
+              disabled={isChanged ? false : true}
             >
               Save
             </SaveButton>
             <CancelButton
               onClick={() => {
+                setIsChanged(false);
                 setIsDisabled(true);
               }}
             >

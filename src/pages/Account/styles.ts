@@ -1,6 +1,10 @@
 import { AiTwotoneEdit } from "react-icons/ai";
 import styled from "styled-components";
 
+interface saveButton {
+  isBlocked?: boolean;
+}
+
 export const PageContent = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 0.3fr;
@@ -95,14 +99,14 @@ export const EditIcon = styled(AiTwotoneEdit)`
   margin-right: 1rem;
   cursor: pointer;
 `;
-export const SaveButton = styled.button`
+export const SaveButton = styled.button<saveButton>`
   width: 4rem;
   padding: 2%;
   height: 2rem;
   border-radius: 0.5rem;
   border: 2px solid ${(props) => props.color};
   color: #ffffff;
-  background-color: #b5c401;
+  background-color: ${(props) => (props.isBlocked ? "#afafaf" : "#b5c401")};
   font-size: 15px;
   font-weight: 600;
   margin-right: 4%;
@@ -113,7 +117,7 @@ export const SaveButton = styled.button`
     box-shadow: none;
   }
   grid-area: save;
-  cursor: pointer;
+  cursor: ${(props) => (props.isBlocked ? "not-allowed" : "pointer")};
 `;
 export const CancelButton = styled.button`
   width: 4rem;

@@ -11,7 +11,7 @@ export interface IAccountResponse {
   picture: null;
 }
 
-interface IAccountGamesRequest {
+export interface IAccountGamesRequest {
   id: number;
   choosen_numbers: string;
   user_id: number;
