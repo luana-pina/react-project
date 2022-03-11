@@ -34,7 +34,7 @@ const ActionButtons: React.FC<{
 
   return (
     <Content>
-      <CompleteGame onClick={props.completeGameHandler}>
+      <CompleteGame onClick={() => props.completeGameHandler()}>
         Complete Game
       </CompleteGame>
       <ClearGame

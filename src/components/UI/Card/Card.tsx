@@ -1,4 +1,5 @@
 import React from "react";
+import { Direction } from "readline";
 import { Content } from "./style";
 
 const Card: React.FC<{
@@ -11,8 +12,8 @@ const Card: React.FC<{
     width?: string;
     height?: string;
     maxHeight?: string;
-    direction?: string;
     alignItems?: string;
+    rowDirection?: boolean;
   };
 }> = (props) => {
   return <Content style={props.style}>{props.children}</Content>;

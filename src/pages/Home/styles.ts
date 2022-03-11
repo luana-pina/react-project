@@ -23,6 +23,7 @@ export const Filters = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-self: center;
   @media (max-width: 880px) {
     flex-direction: column;
     align-items: flex-start;

@@ -1,6 +1,10 @@
 import styled from "styled-components/macro";
 
-export const Wrapper = styled.div`
+interface wrapper {
+  direction: string;
+}
+
+export const Wrapper = styled.div<wrapper>`
   min-height: 100%;
   width: 100%;
   height: 100vh;

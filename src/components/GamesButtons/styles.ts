@@ -1,5 +1,11 @@
 import styled from "styled-components";
 
+interface gameButton {
+  width?: string;
+  height?: string;
+  active: boolean | undefined | null | RegExpMatchArray;
+}
+
 export const Content = styled.div`
   display: grid;
   width: 100%;
@@ -20,7 +26,7 @@ export const Content = styled.div`
   }
 `;
 
-export const GameButton = styled.button`
+export const GameButton = styled.button<gameButton>`
   font-size: 16px;
   font-style: italic;
   text-align: center;

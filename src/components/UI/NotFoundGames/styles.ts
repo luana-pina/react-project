@@ -1,7 +1,11 @@
-import { BiLoaderCircle } from "react-icons/bi";
+import { MdOutlineVideogameAssetOff } from "react-icons/md";
 import styled from "styled-components/macro";
 
-export const LoadingText = styled.p`
+interface notFoundText {
+  isCart?: boolean;
+}
+
+export const NotFoundText = styled.p<notFoundText>`
   width: fit-content;
   font-size: ${(props) => (props.isCart ? "16px" : "20px")};
   font-style: italic;
@@ -10,8 +14,11 @@ export const LoadingText = styled.p`
   opacity: ${(props) => (props.isCart ? "0.7" : "1")};
   margin-left: ${(props) => (props.isCart ? "5px" : "0px")};
   letter-spacing: 0px;
+  @media (min-width: 1900px) {
+    font-size: ${(props) => (props.isCart ? "20px" : "24px")};
+  }
 `;
-export const LoadingIcon = styled(BiLoaderCircle)`
+export const GameIcon = styled(MdOutlineVideogameAssetOff)`
   color: #868686;
   opacity: 0.7;
   margin-left: 1rem;

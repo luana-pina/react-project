@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components/macro";
 
+interface redirect {
+  reverse?: boolean;
+}
+
 export const BottomText = styled.p`
   text-align: center;
   width: max-content;
@@ -163,7 +167,7 @@ export const SubmitButton = styled.button`
     font-size: 27px;
   }
 `;
-export const Redirect = styled.p`
+export const Redirect = styled.p<redirect>`
   display: flex;
   flex-direction: ${(props) => (props.reverse ? "row-reverse" : "row")};
   align-items: center;

@@ -1,7 +1,10 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ICardGame, IRootState } from "../../shared/interfaces";
-import { ICardGameCart } from "../../shared/interfaces/GamesInterfaces";
+import {
+  ICardGameAccount,
+  ICardGameCart,
+} from "../../shared/interfaces/GamesInterfaces";
 import { cartActions } from "../../store/cart-slice";
 import Modal from "../UI/Modal/Modal";
 import {
@@ -17,14 +20,16 @@ import {
   Price,
   SelectedNumbers,
 } from "./styles";
+import { convertToReal } from "../../shared/utils/convertToReal";
 
 const GameCard: React.FC<{
-  item: ICardGame | ICardGameCart;
+  item: ICardGame | ICardGameCart | ICardGameAccount;
   delete?: boolean | undefined;
 }> = (props) => {
   const { item } = props;
   const gamesList = useSelector((state: IRootState) => state.games.gamesType);
   const [color, setColor] = useState<string>("#868686");
+  const [gameName, setGameName] = useState<{}>("#868686");
   const [showModal, setShowModal] = useState<boolean>(false);
   const dispatch = useDispatch();
   const orderlyArray = [...item.choosen_numbers];
@@ -34,30 +39,12 @@ const GameCard: React.FC<{
       gamesList.forEach((game) => {
         if (game.id === item.type.id) {
           setColor(game.color);
+          setGameName(game.type);
         }
       });
     }
     getCardColor();
   }, [gamesList, item]);
-
-  function convertToReal() {
-    let valueString = String(item.price);
-    let convert;
-    let cents;
-    if (valueString.indexOf(".") !== -1) {
-      convert = valueString.replace(".", ",").split("");
-      let separate = convert.indexOf(",");
-      cents = convert.splice(separate);
-      while (cents.length < 3) {
-        cents.push("0");
-      }
-      convert.push(cents.join(""));
-      return convert.join("");
-    }
-    cents = ",00";
-    valueString += cents;
-    return valueString;
-  }
 
   const onDelete = () => {
     if (props.delete) {
@@ -98,8 +85,8 @@ const GameCard: React.FC<{
             {orderlyArray.sort((a, b) => a - b).join(", ")}
           </SelectedNumbers>
           <InfoCard>
-            <GameName color={color}>{item.type.type}</GameName>
-            <Price>R${convertToReal()}</Price>
+            <GameName color={color}>{gameName}</GameName>
+            <Price>R${convertToReal(item.price)}</Price>
           </InfoCard>
         </CardContent>
       </CardWrapper>

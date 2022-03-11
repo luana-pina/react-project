@@ -1,5 +1,10 @@
 import styled from "styled-components";
 import { AiOutlineShoppingCart } from "react-icons/ai";
+import React from "react";
+
+interface buttonProps {
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
+}
 
 export const Content = styled.div`
   width: 100%;
@@ -20,7 +25,7 @@ export const Content = styled.div`
   }
 `;
 
-export const CompleteGame = styled.button`
+export const CompleteGame = styled.button<buttonProps>`
   grid-area: complete;
   width: 10vw;
   height: 7vh;
@@ -51,7 +56,7 @@ export const CompleteGame = styled.button`
     width: 100%;
   }
 `;
-export const ClearGame = styled.button`
+export const ClearGame = styled.button<buttonProps>`
   grid-area: clear;
   width: 10vw;
   height: 7vh;
@@ -83,7 +88,7 @@ export const ClearGame = styled.button`
   }
 `;
 
-export const AddCart = styled.button`
+export const AddCart = styled.button<buttonProps>`
   grid-area: cart;
   justify-self: end;
   display: flex;

@@ -7,15 +7,18 @@ import { toast } from "react-toastify";
 import { IRootState } from "./shared/interfaces";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import ChangePassword from "./pages/ChangePassword/ChangePassword";
-import Games from "./pages/Games/Games";
-import Home from "./pages/Home/Home";
-import Login from "./pages/Login/Login";
-import NotFound from "./pages/NotFound/NotFound";
-import Register from "./pages/Register/Register";
-import ResetPassword from "./pages/ResetPassword/ResetPassword";
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
+import {
+  Account,
+  ChangePassword,
+  Games,
+  Home,
+  Login,
+  NotFound,
+  Register,
+  ResetPassword,
+} from "./pages";
 
 function App() {
   const { getGamesTypes } = games();
@@ -25,15 +28,15 @@ function App() {
   useEffect(() => {
     async function getGamesList() {
       try {
-        await getGamesTypes().then((res) => {
+        await getGamesTypes().then(({ data }) => {
           dispatch(
             gamesActions.getSelectedGame({
-              requestData: res.data.types,
+              requestData: data.types,
             })
           );
           dispatch(
             cartActions.getMinCartValue({
-              min_cart_value: res.data.min_cart_value,
+              min_cart_value: data.min_cart_value,
             })
           );
         });
@@ -54,9 +57,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/home/*" element={<Home />} />
+        <Route path="/account/:userToken" element={<Account />} />
+        <Route path="/games/:gameId" element={<Games />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/games/:gameId" element={<Games />} />
         <Route path="/forgot" element={<ResetPassword />} />
         <Route path="/forgot/:userToken" element={<ChangePassword />} />
         <Route path="/*" element={<NotFound />} />

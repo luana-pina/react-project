@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { BackdropContent, Content, ModalContent } from "./styles";
 
 const Backdrop: React.FC<{ onClose: Function }> = (props) => {
-  return <BackdropContent onClick={props.onClose}></BackdropContent>;
+  return <BackdropContent onClick={() => props.onClose()}></BackdropContent>;
 };
 const ModalOverlay: React.FC<{}> = (props) => {
   return (
@@ -18,7 +18,7 @@ const Modal: React.FC<{ onClose: Function }> = (props) => {
   return (
     <Fragment>
       {ReactDOM.createPortal(
-        <Backdrop onClose={props.onClose} />,
+        <Backdrop onClose={() => props.onClose()} />,
         portalElement ? portalElement : document.createElement("div")
       )}
       {ReactDOM.createPortal(

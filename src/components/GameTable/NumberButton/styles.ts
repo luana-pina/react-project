@@ -1,6 +1,10 @@
 import styled from "styled-components/macro";
 
-export const ButtonTable = styled.div`
+interface buttonTable {
+  isSelected: boolean;
+}
+
+export const ButtonTable = styled.div<buttonTable>`
   width: 70px;
   height: 70px;
   text-align: center;
