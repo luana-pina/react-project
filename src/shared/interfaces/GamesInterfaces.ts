@@ -7,6 +7,12 @@ export interface ICardGame {
   created_at: Date;
   type: GameType;
 }
+export interface ICardGameAccount {
+  id: number;
+  choosen_numbers: number[];
+  price: number;
+  type: { id: number };
+}
 export interface ICardGameCart {
   id: number;
   choosen_numbers: number[];

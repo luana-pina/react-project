@@ -1,7 +1,5 @@
 import React from "react";
-import GameCard from "../GameCard/GameCard";
-import Card from "../UI/Card/Card";
-import { RightArrow } from "../UI/Arrows/Arrows";
+import { Card, GameCard, NotFoundGames, RightArrow } from "../index";
 import {
   CartItems,
   CartTitle,
@@ -15,8 +13,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { cart } from "../../shared/services";
 import { toast } from "react-toastify";
 import { cartActions } from "../../store/cart-slice";
-import NotFoundGames from "../UI/NotFoundGames/NotFoundGames";
 import { useNavigate } from "react-router-dom";
+import { convertToReal } from "../../shared/utils/convertToReal";
 
 const Cart: React.FC<{ close?: Function }> = (props) => {
   const cartData = useSelector((state: IRootState) => state.cart);
@@ -25,25 +23,6 @@ const Cart: React.FC<{ close?: Function }> = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const onClose = props.close ? props.close : () => {};
-
-  function convertToReal() {
-    let valueString = String(totalCart);
-    let convert;
-    let cents;
-    if (valueString.indexOf(".") !== -1) {
-      convert = valueString.replace(".", ",").split("");
-      let separate = convert.indexOf(",");
-      cents = convert.splice(separate);
-      while (cents.length < 3) {
-        cents.push("0");
-      }
-      convert.push(cents.join(""));
-      return convert.join("");
-    }
-    cents = ",00";
-    valueString += cents;
-    return valueString;
-  }
 
   async function saveCartHandler() {
     const cartGamesBody: ICartGamesBody[] = [];
@@ -76,10 +55,15 @@ const Cart: React.FC<{ close?: Function }> = (props) => {
         });
       }
     } else {
-      toast.error("The value min authorized is R$30,00", {
-        position: toast.POSITION.TOP_CENTER,
-        draggable: false,
-      });
+      toast.error(
+        `The value min authorized is R$${convertToReal(
+          cartData.min_cart_value
+        )} `,
+        {
+          position: toast.POSITION.TOP_CENTER,
+          draggable: false,
+        }
+      );
     }
   }
 
@@ -115,14 +99,14 @@ const Cart: React.FC<{ close?: Function }> = (props) => {
           )}
         </CartItems>
         <CartTotal>
-          <span>Cart</span> Total: R$ {convertToReal()}
+          <span>Cart</span> Total: R$ {convertToReal(totalCart)}
         </CartTotal>
       </Card>
       <Card
         style={{
           borderTopLeftRadius: "0px",
           borderTopRightRadius: "0px",
-          direction: "row",
+          rowDirection: true,
           color: "#F4F4F4",
           alignItems: "center",
           width: "70%",

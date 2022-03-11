@@ -26,6 +26,10 @@ const Header: React.FC<{ isHome: boolean | undefined }> = (props) => {
     dispatch(loginActions.isLoginHandler());
     navigate("/login");
   }
+  function AccountHandler() {
+    const userId = localStorage.getItem("bearer");
+    navigate(`/account/${userId}`);
+  }
 
   return (
     <Wrapper>
@@ -39,7 +43,7 @@ const Header: React.FC<{ isHome: boolean | undefined }> = (props) => {
       </LeftContent>
       <Line />
       <RightContent>
-        <NavIcon>Account</NavIcon>
+        <NavIcon onClick={AccountHandler}>Account</NavIcon>
         <Logout onClick={logoutHandler}>
           <NavIcon>Log out</NavIcon>
           <RightArrow size={30} />
