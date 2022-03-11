@@ -10,6 +10,10 @@ export const Label = styled.label`
   font-style: italic;
   font-weight: 600;
   color: #9d9d9d;
+  @media (max-width: 800px) {
+    font-size: ${(props) =>
+      props.style?.fontSize ? "20px !important" : "15px"};
+  }
 `;
 
 export const Input = styled.input<inputs>`
@@ -22,5 +26,8 @@ export const Input = styled.input<inputs>`
   cursor: text;
   :focus {
     outline: none;
+  }
+  @media (max-width: 800px) {
+    font-size: ${(props) => (props.isBlocked ? "15px !important" : "15px")};
   }
 `;

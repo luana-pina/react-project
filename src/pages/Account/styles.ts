@@ -22,6 +22,24 @@ export const PageContent = styled.div`
   background-color: #ffffff;
   border-radius: 10px;
   box-shadow: 0px 3px 25px #00000014;
+  @media (max-width: 1400px) {
+    width: 85%;
+  }
+  @media (max-width: 800px) {
+    grid-template-columns: 1fr 1.5fr 0.3fr;
+    padding-bottom: 4rem;
+  }
+  @media (max-width: 420px) {
+    margin-top: 4vh;
+    grid-template-columns: 1fr 0.05fr;
+    grid-template-areas:
+      "img icon"
+      "name name"
+      "email email"
+      ". buttons"
+      "title title"
+      "games games";
+  }
 `;
 export const ProfileImg = styled.img`
   display: grid;
@@ -37,6 +55,9 @@ export const NameArea = styled.div`
   height: max-content;
   justify-self: start;
   align-self: end;
+  @media (max-width: 420px) {
+    padding: 2rem 1rem 0rem 1rem;
+  }
 `;
 export const EmailArea = styled.div`
   grid-area: email;
@@ -44,6 +65,9 @@ export const EmailArea = styled.div`
   height: max-content;
   justify-self: start;
   align-self: start;
+  @media (max-width: 420px) {
+    padding: 0rem 1rem;
+  }
 `;
 export const GamesArea = styled.div`
   display: grid;
@@ -67,6 +91,10 @@ export const GamesArea = styled.div`
   @media (max-width: 768px) {
     max-height: 250px;
   }
+  @media (max-width: 420px) {
+    grid-template-columns: 1fr;
+    max-height: 22vh;
+  }
 `;
 
 export const GamesAreaTitle = styled.p`
@@ -79,6 +107,13 @@ export const GamesAreaTitle = styled.p`
   font-style: italic;
   font-weight: 600;
   color: #9d9d9d;
+  @media (max-width: 800px) {
+    font-size: 20px;
+  }
+  @media (max-width: 420px) {
+    margin-top: 2rem;
+    padding-left: 1rem;
+  }
 `;
 
 export const AreaButtons = styled.div`
@@ -98,6 +133,9 @@ export const EditIcon = styled(AiTwotoneEdit)`
   justify-self: end;
   margin-right: 1rem;
   cursor: pointer;
+  @media (max-width: 420px) {
+    width: 1.2rem;
+  }
 `;
 export const SaveButton = styled.button<saveButton>`
   width: 4rem;
