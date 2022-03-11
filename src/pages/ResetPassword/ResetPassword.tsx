@@ -99,7 +99,12 @@ function ResetPassword() {
           }}
         >
           <FormLabel inputId="email" label="Email">
-            <Input type="text" id="email" {...register("email")} />
+            <Input
+              type="text"
+              id="email"
+              style={{ maxWidth: "70%" }}
+              {...register("email")}
+            />
           </FormLabel>
         </Card>
         <Card

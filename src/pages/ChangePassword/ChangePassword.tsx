@@ -107,7 +107,12 @@ function ChangePassword() {
           }}
         >
           <FormLabel inputId="password" label="New password">
-            <Input type="password" id="password" {...register("password")} />
+            <Input
+              type="password"
+              id="password"
+              style={{ maxWidth: "60%" }}
+              {...register("password")}
+            />
           </FormLabel>
         </Card>
         <Card
@@ -124,6 +129,7 @@ function ChangePassword() {
             <Input
               type="password"
               id="confirmPassword"
+              style={{ maxWidth: "54%" }}
               {...register("confirmPassword")}
             />
           </FormLabel>

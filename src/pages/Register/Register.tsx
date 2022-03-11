@@ -106,7 +106,12 @@ function Register() {
           }}
         >
           <FormLabel inputId="name" label="Name">
-            <Input type="text" id="name" {...register("name")} />
+            <Input
+              type="text"
+              id="name"
+              style={{ maxWidth: "70%" }}
+              {...register("name")}
+            />
           </FormLabel>
         </Card>
         <Card
@@ -120,7 +125,12 @@ function Register() {
           }}
         >
           <FormLabel inputId="email" label="Email">
-            <Input type="text" id="email" {...register("email")} />
+            <Input
+              type="text"
+              id="email"
+              style={{ maxWidth: "70%" }}
+              {...register("email")}
+            />
           </FormLabel>
         </Card>
         <Card
@@ -134,7 +144,12 @@ function Register() {
           }}
         >
           <FormLabel inputId="password" label="Password">
-            <Input type="password" id="password" {...register("password")} />
+            <Input
+              type="password"
+              id="password"
+              style={{ maxWidth: "70%" }}
+              {...register("password")}
+            />
           </FormLabel>
         </Card>
         <Card
