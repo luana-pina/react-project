@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { games } from "../../shared/services";
@@ -6,11 +6,13 @@ import { IRootState } from "../../shared/interfaces";
 import { gamesActions } from "../../store/games-slice";
 import { cardGameActions } from "../../store/game-card-slice";
 import { toast } from "react-toastify";
-import ActionButtons from "../../components/ActionsButtons/ActionButtons";
-import Cart from "../../components/Cart/Cart";
-import GameTable from "../../components/GameTable/GameTable";
-import GamesButtons from "../../components/GamesButtons/GamesButtons";
-import Layout from "../../components/Layout/Layout";
+import {
+  ActionButtons,
+  Cart,
+  GamesButtons,
+  GameTable,
+  Layout,
+} from "../../components";
 import {
   Content,
   Description,

@@ -4,12 +4,15 @@ import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { IChangePassword } from "../../shared/interfaces/AuthInterfaces";
-import { Input } from "../../components/UI/FormLabel/style";
-import { Form, SubmitButton } from "../../components/Base/style";
-import { RightArrow } from "../../components/UI/Arrows/Arrows";
-import Base from "../../components/Base/Base";
-import Card from "../../components/UI/Card/Card";
-import FormLabel from "../../components/UI/FormLabel/FormLabel";
+import {
+  Base,
+  Card,
+  Form,
+  FormLabel,
+  Input,
+  RightArrow,
+  SubmitButton,
+} from "../../components";
 
 function ChangePassword() {
   const navigate = useNavigate();

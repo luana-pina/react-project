@@ -5,13 +5,17 @@ import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { Forget, Form, SubmitButton } from "../../components/Base/style";
 import { IBodyLogin } from "../../shared/interfaces";
-import { Input } from "../../components/UI/FormLabel/style";
-import { RightArrow } from "../../components/UI/Arrows/Arrows";
-import Base from "../../components/Base/Base";
-import Card from "../../components/UI/Card/Card";
-import FormLabel from "../../components/UI/FormLabel/FormLabel";
+import {
+  Base,
+  Card,
+  Forget,
+  Form,
+  FormLabel,
+  Input,
+  RightArrow,
+  SubmitButton,
+} from "../../components";
 
 function Login() {
   const { handleSubmit, register } = useForm();
@@ -98,7 +102,12 @@ function Login() {
           }}
         >
           <FormLabel inputId="email" label="Email">
-            <Input type="text" id="email" {...register("email")} />
+            <Input
+              type="text"
+              id="email"
+              style={{ maxWidth: "70%" }}
+              {...register("email")}
+            />
           </FormLabel>
         </Card>
         <Card
@@ -112,7 +121,12 @@ function Login() {
           }}
         >
           <FormLabel inputId="password" label="Password">
-            <Input type="password" id="password" {...register("password")} />
+            <Input
+              type="password"
+              id="password"
+              style={{ maxWidth: "70%" }}
+              {...register("password")}
+            />
           </FormLabel>
         </Card>
         <Card

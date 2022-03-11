@@ -4,12 +4,15 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { IBodyRegister } from "../../shared/interfaces";
-import { Input } from "../../components/UI/FormLabel/style";
-import { RightArrow } from "../../components/UI/Arrows/Arrows";
-import { Form, SubmitButton } from "../../components/Base/style";
-import Base from "../../components/Base/Base";
-import Card from "../../components/UI/Card/Card";
-import FormLabel from "../../components/UI/FormLabel/FormLabel";
+import {
+  Base,
+  Card,
+  Form,
+  FormLabel,
+  Input,
+  RightArrow,
+  SubmitButton,
+} from "../../components";
 
 function Register() {
   const { handleSubmit, register } = useForm();

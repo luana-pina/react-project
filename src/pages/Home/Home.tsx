@@ -1,20 +1,21 @@
 import { games } from "../../shared/services";
 import { gamesActions } from "../../store/games-slice";
 import { ICardGame, IRootState } from "../../shared/interfaces";
-import { RightArrow } from "../../components/UI/Arrows/Arrows";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import GameCard from "../../components/GameCard/GameCard";
-import GamesButtons from "../../components/GamesButtons/GamesButtons";
-import Layout from "../../components/Layout/Layout";
-import Loading from "../../components/UI/Loading/Loading";
-import NotFoundGames from "../../components/UI/NotFoundGames/NotFoundGames";
+import {
+  GameCard,
+  GamesButtons,
+  Layout,
+  Loading,
+  NotFoundGames,
+  RightArrow,
+} from "../../components";
 import {
   Filters,
   Label,
-  LeftContent,
   NewBet,
   PageTitle,
   RecentGames,
