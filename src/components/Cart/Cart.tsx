@@ -32,21 +32,30 @@ const Cart: React.FC<{ close?: Function }> = (props) => {
         numbers: item.choosen_numbers,
       });
     });
-    if (cartData.totalAmound >= cartData.min_cart_value) {
-      const requestPopup = toast.loading("Send games...", {
-        position: toast.POSITION.TOP_CENTER,
+    const requestPopup = toast.loading("Send games...", {
+      position: toast.POSITION.TOP_CENTER,
+    });
+    try {
+      await sendCart({ games: cartGamesBody });
+      dispatch(cartActions.clearCart());
+      toast.update(requestPopup, {
+        render: "Games sended successfully!",
+        type: "success",
+        isLoading: false,
+        autoClose: 2000,
       });
-      try {
-        await sendCart({ games: cartGamesBody });
-        dispatch(cartActions.clearCart());
+      navigate("/home");
+    } catch (error) {
+      if (`${error}`.match("400")) {
         toast.update(requestPopup, {
-          render: "Games sended successfully!",
-          type: "success",
+          render: `The value min authorized is R$${convertToReal(
+            cartData.min_cart_value
+          )} `,
+          type: "error",
           isLoading: false,
           autoClose: 2000,
         });
-        navigate("/home");
-      } catch (error) {
+      } else {
         toast.update(requestPopup, {
           render: "Request to failed!",
           type: "error",
@@ -54,16 +63,6 @@ const Cart: React.FC<{ close?: Function }> = (props) => {
           autoClose: 2000,
         });
       }
-    } else {
-      toast.error(
-        `The value min authorized is R$${convertToReal(
-          cartData.min_cart_value
-        )} `,
-        {
-          position: toast.POSITION.TOP_CENTER,
-          draggable: false,
-        }
-      );
     }
   }
 
