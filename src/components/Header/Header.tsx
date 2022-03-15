@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { cartActions } from "../../store/cart-slice";
 import { gamesActions } from "../../store/games-slice";
 import { loginActions } from "../../store/login-slice";
@@ -24,6 +25,10 @@ const Header: React.FC<{ isHome: boolean | undefined }> = (props) => {
     dispatch(gamesActions.clearData());
     dispatch(cartActions.clearCart());
     dispatch(loginActions.isLoginHandler());
+    toast.success("User log out successfully", {
+      position: toast.POSITION.TOP_CENTER,
+      draggable: false,
+    });
     navigate("/login");
   }
   function AccountHandler() {
