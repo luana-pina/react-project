@@ -23,10 +23,12 @@ export const Filters = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  padding-left: 3rem;
   justify-self: center;
   @media (max-width: 880px) {
     flex-direction: column;
     align-items: flex-start;
+    padding-left: 0px;
     width: 100%;
   }
 `;
