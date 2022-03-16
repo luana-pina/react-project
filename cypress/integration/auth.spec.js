@@ -49,12 +49,20 @@ describe("Login and Logout", () => {
     cy.get(".style__SubmitButton-sc-wm5ymf-7").click();
     cy.wait("@loginReq").its("response.statusCode").should("eq", 401);
   });
-  it("login with a valid credentials and logout", () => {
+  it("login with a valid credentials", () => {
     cy.get("#email").clear().type("luana.pina@luby.software");
     cy.get("#password").clear().type("secret");
     cy.intercept("POST", "**/login").as("loginReq");
     cy.get(".style__SubmitButton-sc-wm5ymf-7").click();
-    cy.wait("@loginReq").its("response.statusCode").should("eq", 200);
+    cy.wait("@loginReq")
+      .then(({ response }) => {
+        Cypress.env("loginToken", response.body.token.token);
+      })
+      .its("response.statusCode")
+      .should("eq", 200);
+  });
+  it("logout", () => {
+    localStorage.setItem("bearer", Cypress.env("loginToken"));
     cy.get(".styles__Logout-sc-v0qde6-4").click();
   });
 });

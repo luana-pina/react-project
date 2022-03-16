@@ -34,51 +34,41 @@ describe("Create a new user", () => {
   });
 });
 describe("Update user", () => {
-  it("change to a invalid name", () => {
-    cy.intercept("GET", "**/user/my-account", (req) => {
-      req.headers.Authorization =
-        "Bearer OTQ.zbhcg9BjLpTfSjxdOnsoN0yIGIQCRnQinSd_XHovZTU12AX-42TFJQU_S5wG";
-    }).as("getAccoutReq");
-    cy.visit(
-      "http://localhost:3000/account/OTQ.zbhcg9BjLpTfSjxdOnsoN0yIGIQCRnQinSd_XHovZTU12AX-42TFJQU_S5wG"
+  beforeEach(() => {
+    localStorage.setItem(
+      "bearer",
+      "OTQ.zbhcg9BjLpTfSjxdOnsoN0yIGIQCRnQinSd_XHovZTU12AX-42TFJQU_S5wG"
     );
+    Cypress.env(
+      "userToken",
+      "OTQ.zbhcg9BjLpTfSjxdOnsoN0yIGIQCRnQinSd_XHovZTU12AX-42TFJQU_S5wG"
+    );
+  });
+  it("change to a invalid name", () => {
+    cy.intercept("GET", "**/user/my-account").as("getAccoutReq");
+    cy.visit(`http://localhost:3000/account/${Cypress.env("userToken")}`);
     cy.wait("@getAccoutReq").its("response.statusCode").should("eq", 200);
     cy.get(".sc-dJjYzT").click();
     cy.get("#name").clear().type("Ma");
     cy.get(".sc-hGPBjI").click();
   });
   it("change to a valid name", () => {
-    cy.intercept("PUT", "**/user/update", (req) => {
-      req.headers.Authorization =
-        "Bearer OTQ.zbhcg9BjLpTfSjxdOnsoN0yIGIQCRnQinSd_XHovZTU12AX-42TFJQU_S5wG";
-    }).as("userUpdateReq");
-    cy.intercept("GET", "**/user/my-account", (req) => {
-      req.headers.Authorization =
-        "Bearer OTQ.zbhcg9BjLpTfSjxdOnsoN0yIGIQCRnQinSd_XHovZTU12AX-42TFJQU_S5wG";
-    }).as("getAccoutReq");
+    cy.intercept("PUT", "**/user/update").as("userUpdateReq");
+    cy.intercept("GET", "**/user/my-account").as("getAccoutReq");
     cy.get("#name").clear().type("Manoel");
     cy.get(".sc-hGPBjI").click();
     cy.wait("@userUpdateReq").its("response.statusCode").should("eq", 200);
   });
   it("change to a invalid email", () => {
-    cy.intercept("GET", "**/user/my-account", (req) => {
-      req.headers.Authorization =
-        "Bearer OTQ.zbhcg9BjLpTfSjxdOnsoN0yIGIQCRnQinSd_XHovZTU12AX-42TFJQU_S5wG";
-    }).as("getAccoutReq");
+    cy.intercept("GET", "**/user/my-account").as("getAccoutReq");
     cy.get(".sc-dJjYzT").click();
     cy.wait("@getAccoutReq").its("response.statusCode").should("eq", 200);
     cy.get("#email").clear().type("manoel@luby");
     cy.get(".sc-hGPBjI").click();
   });
   it("change to a valid email", () => {
-    cy.intercept("PUT", "**/user/update", (req) => {
-      req.headers.Authorization =
-        "Bearer OTQ.zbhcg9BjLpTfSjxdOnsoN0yIGIQCRnQinSd_XHovZTU12AX-42TFJQU_S5wG";
-    }).as("userUpdateReq");
-    cy.intercept("GET", "**/user/my-account", (req) => {
-      req.headers.Authorization =
-        "Bearer OTQ.zbhcg9BjLpTfSjxdOnsoN0yIGIQCRnQinSd_XHovZTU12AX-42TFJQU_S5wG";
-    }).as("getAccoutReq");
+    cy.intercept("PUT", "**/user/update").as("userUpdateReq");
+    cy.intercept("GET", "**/user/my-account").as("getAccoutReq");
     cy.get("#email").clear().type("manoel@luby.com");
     cy.get(".sc-hGPBjI").click();
     cy.wait("@userUpdateReq").its("response.statusCode").should("eq", 200);
