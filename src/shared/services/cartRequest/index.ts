@@ -1,4 +1,4 @@
-import { ICartGamesBody } from "../../interfaces";
+import { ICartGamesBody } from "@interfaces/";
 import instance from "../axios.config";
 
 const cart = () => {
