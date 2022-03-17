@@ -4,7 +4,7 @@
 
 describe("Create a new user", () => {
   it("entering a invalid name", () => {
-    cy.visit("http://localhost:3000/register");
+    cy.visit("/register");
     cy.get("#name").type("Ma");
     cy.get("#email").type("matheus@biomedh.com.br");
     cy.get("#password").type("1234");
@@ -46,7 +46,7 @@ describe("Update user", () => {
   });
   it("change to a invalid name", () => {
     cy.intercept("GET", "**/user/my-account").as("getAccoutReq");
-    cy.visit(`http://localhost:3000/account/${Cypress.env("userToken")}`);
+    cy.visit(`/account/${Cypress.env("userToken")}`);
     cy.wait("@getAccoutReq").its("response.statusCode").should("eq", 200);
     cy.get(".sc-dJjYzT").click();
     cy.get("#name").clear().type("Ma");

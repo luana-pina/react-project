@@ -4,14 +4,14 @@
 
 describe("Change password", () => {
   it("entering a non-existent user email", () => {
-    cy.visit("http://localhost:3000/forgot");
+    cy.visit("/forgot");
     cy.get("#email").type("luanapina@cpejr.com.br");
     cy.intercept("POST", "**/reset").as("sendLinkReq");
     cy.get(".style__SubmitButton-sc-wm5ymf-7").click();
     cy.wait("@sendLinkReq").its("response.statusCode").should("eq", 404);
   });
   it("entering a invalid email", () => {
-    cy.visit("http://localhost:3000/forgot");
+    cy.visit("/forgot");
     cy.get("#email").type("ari@luby.");
     cy.get(".style__SubmitButton-sc-wm5ymf-7").click();
   });
@@ -37,7 +37,7 @@ describe("Change password", () => {
 
 describe("Login and Logout", () => {
   it("login with a invalid email", () => {
-    cy.visit("http://localhost:3000/login");
+    cy.visit("/login");
     cy.get("#email").type("luana.pina@luby");
     cy.get("#password").type("1234");
     cy.get(".style__SubmitButton-sc-wm5ymf-7").click();
@@ -63,7 +63,7 @@ describe("Login and Logout", () => {
   });
   it("logout", () => {
     localStorage.setItem("bearer", Cypress.env("loginToken"));
-    cy.visit("http://localhost:3000/home");
+    cy.visit("/home");
     cy.get(".styles__Logout-sc-v0qde6-4").click();
   });
 });
