@@ -63,6 +63,7 @@ describe("Login and Logout", () => {
   });
   it("logout", () => {
     localStorage.setItem("bearer", Cypress.env("loginToken"));
+    cy.visit("http://localhost:3000/home");
     cy.get(".styles__Logout-sc-v0qde6-4").click();
   });
 });
