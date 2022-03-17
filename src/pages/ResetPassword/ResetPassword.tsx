@@ -1,5 +1,5 @@
 import * as yup from "yup";
-import { auth } from "../../shared/services";
+import { auth } from "@services/";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +11,7 @@ import {
   Input,
   RightArrow,
   SubmitButton,
-} from "../../components";
+} from "@components/";
 
 function ResetPassword() {
   const { handleSubmit, register } = useForm();

@@ -1,9 +1,9 @@
 import * as yup from "yup";
-import { auth } from "../../shared/services";
+import { auth } from "@services/";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
-import { IChangePassword } from "../../shared/interfaces/AuthInterfaces";
+import { IChangePassword } from "@interfaces/";
 import {
   Base,
   Card,
@@ -12,7 +12,7 @@ import {
   Input,
   RightArrow,
   SubmitButton,
-} from "../../components";
+} from "@components/";
 
 function ChangePassword() {
   const navigate = useNavigate();

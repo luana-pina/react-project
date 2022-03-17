@@ -1,10 +1,9 @@
-import { cartActions } from "./store/cart-slice";
-import { games } from "./shared/services";
-import { gamesActions } from "./store/games-slice";
+import { cartActions, gamesActions } from "@store/";
+import { games } from "@services/";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
-import { IRootState } from "./shared/interfaces";
+import { IRootState } from "@interfaces/";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "./App.css";

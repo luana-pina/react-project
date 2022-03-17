@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, GameCard, NotFoundGames, RightArrow } from "../index";
+import { Card, GameCard, NotFoundGames, RightArrow } from "@components/";
 import {
   CartItems,
   CartTitle,
@@ -8,13 +8,13 @@ import {
   TextButton,
   TopContent,
 } from "./styles";
-import { ICartGamesBody, IRootState } from "../../shared/interfaces";
+import { ICartGamesBody, IRootState } from "@interfaces/";
 import { useDispatch, useSelector } from "react-redux";
-import { cart } from "../../shared/services";
+import { cart } from "@services/";
 import { toast } from "react-toastify";
-import { cartActions } from "../../store/cart-slice";
+import { cartActions } from "@store/";
 import { useNavigate } from "react-router-dom";
-import { convertToReal } from "../../shared/utils/convertToReal";
+import { convertToReal } from "@utils/convertToReal";
 
 const Cart: React.FC<{ close?: Function }> = (props) => {
   const cartData = useSelector((state: IRootState) => state.cart);

@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Content } from "./styles";
-import { IRootState } from "../../shared/interfaces";
+import { IRootState } from "@interfaces/";
 import { GameButton } from "./styles";
 
 const GamesButtons: React.FC<{

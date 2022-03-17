@@ -1,9 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { ICardGameCart, IRootState } from "../../shared/interfaces";
-import { cartActions } from "../../store/cart-slice";
-import { cardGameActions } from "../../store/game-card-slice";
+import { ICardGameCart, IRootState } from "@interfaces/";
+import { cardGameActions, cartActions } from "@store/";
 import { AddCart, CartIcon, ClearGame, CompleteGame, Content } from "./styles";
 
 const ActionButtons: React.FC<{

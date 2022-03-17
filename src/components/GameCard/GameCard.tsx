@@ -1,12 +1,14 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ICardGame, IRootState } from "../../shared/interfaces";
+import { convertToReal } from "@utils/convertToReal";
+import { cartActions } from "@store/";
+import { Modal } from "@components/";
 import {
+  ICardGame,
+  IRootState,
   ICardGameAccount,
   ICardGameCart,
-} from "../../shared/interfaces/GamesInterfaces";
-import { cartActions } from "../../store/cart-slice";
-import Modal from "../UI/Modal/Modal";
+} from "@interfaces/index";
 import {
   ButtonsArea,
   CardContent,
@@ -20,7 +22,6 @@ import {
   Price,
   SelectedNumbers,
 } from "./styles";
-import { convertToReal } from "../../shared/utils/convertToReal";
 
 const GameCard: React.FC<{
   item: ICardGame | ICardGameCart | ICardGameAccount;

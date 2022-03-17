@@ -1,11 +1,11 @@
 import * as yup from "yup";
-import { auth } from "../../shared/services";
-import { loginActions } from "../../store/login-slice";
+import { auth } from "@services/";
+import { loginActions } from "@store/";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { IBodyLogin } from "../../shared/interfaces";
+import { IBodyLogin } from "@interfaces/";
 import {
   Base,
   Card,
@@ -15,7 +15,7 @@ import {
   Input,
   RightArrow,
   SubmitButton,
-} from "../../components";
+} from "@components/";
 
 function Login() {
   const { handleSubmit, register } = useForm();

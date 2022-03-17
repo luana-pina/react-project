@@ -1,7 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { LeftArrow, RightArrow } from "../UI/Arrows/Arrows";
-import { Wrapper } from "../UI/Wrapper/Wrapper";
+import { LeftArrow, RightArrow, Wrapper } from "@components/";
 import {
   BottomText,
   DecoratedText,

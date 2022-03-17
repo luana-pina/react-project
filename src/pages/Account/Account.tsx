@@ -8,10 +8,10 @@ import {
   Input,
   Layout,
   NotFoundGames,
-} from "../../components";
-import { IAccountResponse } from "../../shared/interfaces/UserInterfaces";
-import user from "../../shared/services/user";
-import { stringToArray } from "../../shared/utils/stringToArray";
+} from "@components/";
+import { IAccountResponse } from "@interfaces/UserInterfaces";
+import { user } from "@services/";
+import { stringToArray } from "@utils/stringToArray";
 import {
   AreaButtons,
   CancelButton,

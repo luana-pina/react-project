@@ -1,9 +1,9 @@
 import * as yup from "yup";
-import { auth } from "../../shared/services";
+import { auth } from "@services/";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { IBodyRegister } from "../../shared/interfaces";
+import { IBodyRegister } from "@interfaces/";
 import {
   Base,
   Card,
@@ -12,7 +12,7 @@ import {
   Input,
   RightArrow,
   SubmitButton,
-} from "../../components";
+} from "@components/";
 
 function Register() {
   const { handleSubmit, register } = useForm();

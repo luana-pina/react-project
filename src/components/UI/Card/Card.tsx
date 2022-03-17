@@ -1,5 +1,4 @@
 import React from "react";
-import { Direction } from "readline";
 import { Content } from "./style";
 
 const Card: React.FC<{

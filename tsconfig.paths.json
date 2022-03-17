@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": ["./src/components/index"],
+      "@interfaces/*": ["./src/shared/interfaces/index"],
+      "@services/*": ["./src/shared/services/index"],
+      "@utils/*": ["./src/shared/utils/*"],
+      "@store/*": ["./src/store/index"]
+    }
+  }
+}

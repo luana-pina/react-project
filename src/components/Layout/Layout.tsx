@@ -1,6 +1,5 @@
 import React from "react";
-import Header from "../Header/Header";
-import { Wrapper } from "../UI/Wrapper/Wrapper";
+import { Wrapper, Header } from "@components/";
 import { PageContent } from "./style";
 
 const Layout: React.FC<{ isHome?: boolean | undefined }> = (props) => {

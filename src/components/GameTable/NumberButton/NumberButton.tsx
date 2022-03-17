@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { IRootState } from "../../../shared/interfaces";
+import { IRootState } from "@interfaces/";
 import { ButtonTable } from "./styles";
 
 const NumberButton: React.FC<{

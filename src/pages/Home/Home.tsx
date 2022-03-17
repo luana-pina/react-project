@@ -1,6 +1,6 @@
-import { games } from "../../shared/services";
-import { gamesActions } from "../../store/games-slice";
-import { ICardGame, IRootState } from "../../shared/interfaces";
+import { games } from "@services/";
+import { gamesActions } from "@store/";
+import { ICardGame, IRootState } from "@interfaces/";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,7 +12,7 @@ import {
   Loading,
   NotFoundGames,
   RightArrow,
-} from "../../components";
+} from "@components/";
 import {
   Filters,
   Label,

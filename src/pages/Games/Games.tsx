@@ -1,10 +1,9 @@
 import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { games } from "../../shared/services";
-import { IRootState } from "../../shared/interfaces";
-import { gamesActions } from "../../store/games-slice";
-import { cardGameActions } from "../../store/game-card-slice";
+import { games } from "@services/";
+import { IRootState } from "@interfaces/";
+import { gamesActions, cardGameActions } from "@store/";
 import { toast } from "react-toastify";
 import {
   ActionButtons,
@@ -12,7 +11,7 @@ import {
   GamesButtons,
   GameTable,
   Layout,
-} from "../../components";
+} from "@components/";
 import {
   Content,
   Description,
