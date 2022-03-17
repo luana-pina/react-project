@@ -20,6 +20,7 @@ const GamesButtons: React.FC<{
         width={props.width}
         height={props.height}
         color={item.color}
+        id={`${item.id}`}
         active={gameId === item.id || params["*"]?.match(`${item.id}`)}
         key={item.id}
         onClick={() => props.to(item.id)}
